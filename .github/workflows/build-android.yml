@@ -109,6 +109,27 @@ jobs:
             haxelib run lime build android -final -D ONLY_ARM64 -D COMPILE_EXPERIMENTAL --app-version="$APP_VERSION"
           fi
 
+      - name: 验签名（顺带兜底重签）
+        if: always()
+        run: |
+          APK=$(find export/release/android/bin/app/build/outputs/apk/release -name '*.apk' | head -1)
+          echo "产物: $APK"
+          ls -l export/release/android/bin/app/build/outputs/apk/release/ || true
+          BT=$(ls -d $ANDROID_HOME/build-tools/*/ | sort -V | tail -1)
+          echo "build-tools: $BT"
+          # 先看 gradle 有没有签
+          set +e
+          $BT/apksigner verify --print-certs "$APK" > /tmp/verify.txt 2>&1
+          RC=$?
+          set -e
+          cat /tmp/verify.txt || true
+          if [ $RC -ne 0 ]; then
+            echo "::warning::gradle 没签名（或用的是空 signingConfig），手动补签"
+            $BT/apksigner sign --ks key.keystore --ks-pass pass:psychengine \
+              --ks-key-alias psychport --key-pass pass:psychengine "$APK"
+            $BT/apksigner verify --print-certs "$APK"
+          fi
+
       - name: 传 APK
         if: always()
         uses: actions/upload-artifact@v4
