@@ -1,11 +1,3 @@
-*.orig
-art/
-building/
-commandline/
-mods/
-addons/
-adb
-key.keystore
 export/
 .dependency/
 haxe_libraries/
