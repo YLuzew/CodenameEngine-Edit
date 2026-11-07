@@ -27,10 +27,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: 腾出磁盘空间
-        # runner 自带一堆用不到的 SDK/工具链，Android NDK + hxcpp 吃盘
+      - name: 探一下 runner 自带的 Android SDK
+        # ubuntu-latest 预装 SDK（含 cmdline-tools），这里不装任何 setup-android action：
+        # 那个 action 会去改写预装的 sdkmanager 版本，实测在 runner 上直接 exit 1。
         run: |
-          sudo rm -rf /usr/share/dotnet /usr/local/lib/android/sdk/ndk/2[0-4].* /opt/ghc /opt/hostedtoolcache/CodeQL || true
+          echo "ANDROID_HOME=${ANDROID_HOME:-/usr/local/lib/android/sdk}"
+          SDK="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
+          echo "SDK=$SDK" >> "$GITHUB_ENV"
+          ls "$SDK" || true
+          which sdkmanager || find "$SDK" -name sdkmanager -type f | head -3
           df -h /
 
       - name: JDK 17
@@ -39,16 +44,20 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: 安装 NDK / build-tools
+      - name: 装 NDK + platform（用预装 sdkmanager）
         run: |
-          yes | sdkmanager --licenses > /dev/null 2>&1 || true
-          sdkmanager --install "platform-tools" "build-tools;34.0.0" "platforms;android-34" "ndk;25.2.9519653"
-          echo "ANDROID_NDK_HOME=$ANDROID_HOME/ndk/25.2.9519653" >> "$GITHUB_ENV"
-          echo "ANDROID_NDK_ROOT=$ANDROID_HOME/ndk/25.2.9519653" >> "$GITHUB_ENV"
-          echo "ANDROID_SDK_ROOT=$ANDROID_HOME" >> "$GITHUB_ENV"
+          SDK="${{ env.SDK }}"
+          SM="$SDK/cmdline-tools/latest/bin/sdkmanager"
+          [ -x "$SM" ] || SM="$(find "$SDK/cmdline-tools" -name sdkmanager -type f | sort -r | head -1)"
+          [ -x "$SM" ] || SM="$(which sdkmanager)"
+          echo "用 $SM"
+          yes | "$SM" --licenses > /dev/null 2>&1 || true
+          yes | "$SM" "platform-tools" "build-tools;34.0.0" "platforms;android-34" "ndk;25.2.9519653" || \
+            "$SM" "platform-tools" "build-tools;34.0.0" "platforms;android-34" "ndk;25.2.9519653"
+          echo "ANDROID_NDK_HOME=$SDK/ndk/25.2.9519653" >> "$GITHUB_ENV"
+          echo "ANDROID_NDK_ROOT=$SDK/ndk/25.2.9519653" >> "$GITHUB_ENV"
+          echo "ANDROID_SDK_ROOT=$SDK" >> "$GITHUB_ENV"
+          ls "$SDK/ndk/" || true
 
       - name: Haxe 4.3.7
         uses: krdlab/setup-haxe@master
@@ -62,35 +71,36 @@ jobs:
           key: haxelib-${{ runner.os }}-${{ hashFiles('building/libs-mobile.xml') }}
 
       - name: 安装依赖库
-        # Setup.hx 靠 #if desktop 选 libs.xml，在 Linux runner 上会选成桌面那套；
+        # Setup.hx 靠 #if desktop 选 libs.xml，Linux runner 上会选成桌面那套；
         # 必须显式 --lib 指到 libs-mobile.xml，否则装的是 desktop 依赖、Android 编不过。
         run: |
           mkdir -p ~/haxelib
           haxelib setup ~/haxelib
           haxe -cp commandline -D analyzer-optimize --run Main setup --lib=building/libs-mobile.xml
 
-      - name: 写 Android 配置
-        # lime 读环境变量拿 SDK/NDK 路径；这里再显式落一份配置，避免 runner 上猜不到
+      - name: 写 lime 配置
         run: |
-          haxelib run lime config ANDROID_SDK_ROOT "$ANDROID_HOME" || true
-          haxelib run lime config ANDROID_NDK_ROOT "$ANDROID_NDK_HOME" || true
+          haxelib run lime config ANDROID_SDK_ROOT "$ANDROID_SDK_ROOT" || true
+          haxelib run lime config ANDROID_NDK_ROOT "$ANDROID_NDK_ROOT" || true
           haxelib run lime config JAVA_HOME "$JAVA_HOME" || true
 
       - name: 编译 APK
         run: |
           if [ "${{ inputs.debug }}" = "true" ]; then
-            haxelib run lime build android -debug -verbose
+            haxelib run lime build android -debug
           else
             haxelib run lime build android -release
           fi
 
       - name: 收集产物
+        if: always()
         run: |
           mkdir -p out
-          find export -name '*.apk' -exec cp {} out/ \;
+          find export -name '*.apk' -exec cp {} out/ \; 2>/dev/null || true
           ls -lh out/ || true
 
       - name: 上传 APK
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: codename-engine-android
