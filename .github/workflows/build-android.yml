@@ -73,22 +73,18 @@ jobs:
       - name: 安装依赖库
         # Setup.hx 靠 #if desktop 选 libs.xml，Linux runner 上会选成桌面那套；
         # 必须显式 --lib 指到 libs-mobile.xml，否则装的是 desktop 依赖、Android 编不过。
+        # 另：仓库里已把 libs-mobile.xml 的 openfl 分支从 old 改成 master
+        # （old 缺 Matrix3D.transformVectorToOutput / Vector3D.crossProductToOutput，foxlite 编不过）。
         run: |
           mkdir -p ~/haxelib
           haxelib setup ~/haxelib
+          echo "haxelib repo: $(haxelib config)"
           haxe -cp commandline -D analyzer-optimize --run Main setup --lib=building/libs-mobile.xml
-
-      - name: 修 openfl 分支
-        # libs-mobile.xml 把 openfl 钉在 CodenameCrew/cne-openfl 的 old 分支，
-        # 而 old 分支的 openfl.geom.Matrix3D 没有 transformVectorToOutput、
-        # Vector3D 没有 crossProductToOutput —— foxlite 是拿这两个方法编译的，直接报错：
-        #   openfl.geom.Matrix3D has no field transformVectorToOutput
-        # only master 分支有这两个方法。这里换成 master 再编。
-        run: |
-          haxelib git openfl https://github.com/CodenameCrew/cne-openfl master
-          echo "--- 确认方法存在 ---"
-          grep -c "transformVectorToOutput" ~/haxelib/openfl/git/src/openfl/geom/Matrix3D.hx || true
-          grep -c "crossProductToOutput" ~/haxelib/openfl/git/src/openfl/geom/Vector3D.hx || true
+          echo "--- 编译期真正用的仓库 ---"
+          echo "项目内 .haxelib: $(ls -d .haxelib 2>/dev/null || echo 无)"
+          for f in .haxelib/openfl/git/src/openfl/geom/Matrix3D.hx ~/haxelib/openfl/git/src/openfl/geom/Matrix3D.hx; do
+            [ -f "$f" ] && echo "$f transformVectorToOutput=$(grep -c transformVectorToOutput "$f")"
+          done
 
       - name: 写 lime 配置
         # lime 判定的三个键名是 ANDROID_SETUP / ANDROID_SDK / ANDROID_NDK_ROOT（不是 ANDROID_SDK_ROOT）。
