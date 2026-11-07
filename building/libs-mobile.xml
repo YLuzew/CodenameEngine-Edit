@@ -7,7 +7,7 @@
 		<git name="mobile-controls" url="https://github.com/azmlpoh/FNFmobile-controls" />
 
 		<!-- OpenFL & Lime (Required for Flixel) -->
-		<git name="openfl" url="https://github.com/CodenameCrew/cne-openfl" ref="master" /><!-- 原为 ref="old"；old 分支的 Matrix3D 缺 transformVectorToOutput、Vector3D 缺 crossProductToOutput，foxlite 编不过 -->
+				<git name="openfl" url="https://github.com/CodenameCrew/cne-openfl" ref="old" />
 		<git name="lime" url="https://github.com/QQQEB159/lime-8.2.2" />
 
 		<!-- Flixel -->
@@ -19,7 +19,6 @@
 		<git name="hxdiscord_rpc" url="https://github.com/CodenameCrew/cne-hxdiscord_rpc" ref="old" skipDeps="true"/>
 		<git name="hxvlc" url="https://github.com/CodenameCrew/cne-hxvlc" skipDeps="true"/>
 		<lib name="funkin-modchart" url="https://github.com/CodenameCrew/FunkinModchart" skipDeps="true"/>
-		<git name="foxlite" url="https://github.com/dwdvIl/foxlite" skipDeps="true"/>
 		<lib name="hxWebSockets" />
 
 		<!-- Documentation and other features -->

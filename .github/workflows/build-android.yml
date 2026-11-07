@@ -1,13 +1,20 @@
 name: Build Android APK
 
 # 手动触发：仓库页 Actions → Build Android APK → Run workflow
+# 构建参数照抄官方移动端仓库 azmlpoh/CodenameEngine-Mobile 的 .github/workflows/android.yml
 on:
   workflow_dispatch:
     inputs:
-      debug:
-        description: '打 debug 包（体积更大、带 trace）'
+      version:
+        description: 'App 版本号（留空用 project.xml 里的）'
+        required: false
+        default: ''
+        type: string
+      experimental:
+        description: '开 COMPILE_EXPERIMENTAL（官方默认开）'
+        required: false
+        default: true
         type: boolean
-        default: false
   push:
     branches: [main]
     paths-ignore:
@@ -18,105 +25,95 @@ concurrency:
   group: android-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  HAXE_VERSION: 4.3.7
+  HXCPP_COMPILE_CACHE: ${{ github.workspace }}/.hxcpp_cache
+
 jobs:
   apk:
     runs-on: ubuntu-latest
-    timeout-minutes: 150
+    timeout-minutes: 180
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: 探一下 runner 自带的 Android SDK
-        # ubuntu-latest 预装 SDK（含 cmdline-tools），这里不装任何 setup-android action：
-        # 那个 action 会去改写预装的 sdkmanager 版本，实测在 runner 上直接 exit 1。
-        run: |
-          echo "ANDROID_HOME=${ANDROID_HOME:-/usr/local/lib/android/sdk}"
-          SDK="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
-          echo "SDK=$SDK" >> "$GITHUB_ENV"
-          ls "$SDK" || true
-          which sdkmanager || find "$SDK" -name sdkmanager -type f | head -3
-          df -h /
-
-      - name: JDK 17
-        uses: actions/setup-java@v4
         with:
-          distribution: temurin
-          java-version: '17'
+          fetch-depth: 0
 
-      - name: 装 NDK + platform（用预装 sdkmanager）
+      - name: 定版本号
         run: |
-          SDK="${{ env.SDK }}"
-          SM="$SDK/cmdline-tools/latest/bin/sdkmanager"
-          [ -x "$SM" ] || SM="$(find "$SDK/cmdline-tools" -name sdkmanager -type f | sort -r | head -1)"
-          [ -x "$SM" ] || SM="$(which sdkmanager)"
-          echo "用 $SM"
-          yes | "$SM" --licenses > /dev/null 2>&1 || true
-          yes | "$SM" "platform-tools" "build-tools;34.0.0" "platforms;android-34" "ndk;25.2.9519653" || \
-            "$SM" "platform-tools" "build-tools;34.0.0" "platforms;android-34" "ndk;25.2.9519653"
-          echo "ANDROID_NDK_HOME=$SDK/ndk/25.2.9519653" >> "$GITHUB_ENV"
-          echo "ANDROID_NDK_ROOT=$SDK/ndk/25.2.9519653" >> "$GITHUB_ENV"
-          echo "ANDROID_SDK_ROOT=$SDK" >> "$GITHUB_ENV"
-          ls "$SDK/ndk/" || true
+          if [ -n "${{ inputs.version }}" ]; then
+            sed -i 's/version="[0-9.]*"/version="${{ inputs.version }}"/' project.xml
+            echo "APP_VERSION=${{ inputs.version }}" >> $GITHUB_ENV
+          else
+            V=$(grep -o 'version="[0-9.]*"' project.xml | head -1 | sed 's/version="//;s/"//')
+            echo "APP_VERSION=$V" >> $GITHUB_ENV
+          fi
+          echo "版本: $APP_VERSION"
 
-      - name: Haxe 4.3.7
-        uses: krdlab/setup-haxe@master
+      - name: Haxe
+        uses: krdlab/setup-haxe@v2
         with:
-          haxe-version: 4.3.7
+          haxe-version: ${{ env.HAXE_VERSION }}
 
-      - name: 缓存 haxelib
+      - name: Android NDK r25c
+        id: setup-ndk
+        uses: nttld/setup-ndk@main
+        with:
+          ndk-version: r25c
+
+      - name: 缓存
         uses: actions/cache@v4
         with:
-          path: ~/haxelib
-          key: haxelib-${{ runner.os }}-${{ hashFiles('building/libs-mobile.xml') }}
+          key: cache-build-android-${{ hashFiles('building/libs-mobile.xml','project.xml') }}
+          path: |
+            ~/.gradle
+            .haxelib/
+            ~/haxelib/
+            export/release/android/haxe/
+            export/release/android/obj/
+          restore-keys: |
+            cache-build-android-
 
-      - name: 安装依赖库
-        # Setup.hx 靠 #if desktop 选 libs.xml，Linux runner 上会选成桌面那套；
-        # 必须显式 --lib 指到 libs-mobile.xml，否则装的是 desktop 依赖、Android 编不过。
-        # 另：仓库里已把 libs-mobile.xml 的 openfl 分支从 old 改成 master
-        # （old 缺 Matrix3D.transformVectorToOutput / Vector3D.crossProductToOutput，foxlite 编不过）。
+      - name: 装依赖
+        # 与官方一致：不传 --lib。Setup.hx 里 #if desktop 在 Linux 为真、走 libs.xml，
+        # 但本仓库的 libs.xml 与 libs-mobile.xml 只在 lime 那一行不同（都用 openfl old），
+        # 官方 CI 也是这么跑的。
         run: |
-          mkdir -p ~/haxelib
+          rm -rf ~/.haxelib
           haxelib setup ~/haxelib
-          echo "haxelib repo: $(haxelib config)"
-          haxe -cp commandline -D analyzer-optimize --run Main setup --lib=building/libs-mobile.xml
-          echo "--- 编译期真正用的仓库 ---"
-          echo "项目内 .haxelib: $(ls -d .haxelib 2>/dev/null || echo 无)"
-          for f in .haxelib/openfl/git/src/openfl/geom/Matrix3D.hx ~/haxelib/openfl/git/src/openfl/geom/Matrix3D.hx; do
-            [ -f "$f" ] && echo "$f transformVectorToOutput=$(grep -c transformVectorToOutput "$f")"
-          done
+          haxe -cp commandline -D analyzer-optimize --run Main setup -si
 
-      - name: 写 lime 配置
-        # lime 判定的三个键名是 ANDROID_SETUP / ANDROID_SDK / ANDROID_NDK_ROOT（不是 ANDROID_SDK_ROOT）。
-        # AndroidPlatform.hx:110 先查 ANDROID_SETUP，缺了就报「You need to run lime setup android」。
+      - name: 配置 lime
         run: |
+          haxelib run lime setup -alias -y
+          haxelib run lime config ANDROID_SDK $ANDROID_HOME
+          haxelib run lime config ANDROID_NDK_ROOT $ANDROID_NDK_HOME
+          haxelib run lime config JAVA_HOME $JAVA_HOME_17_X64
           haxelib run lime config ANDROID_SETUP true
-          haxelib run lime config ANDROID_SDK "$ANDROID_SDK_ROOT"
-          haxelib run lime config ANDROID_NDK_ROOT "$ANDROID_NDK_ROOT"
-          haxelib run lime config JAVA_HOME "$JAVA_HOME"
-          echo "--- ~/.lime/config.json ---"
-          cat ~/.lime/config.json || true
 
-      - name: 编译 APK
+      - name: 修 haxelib 指向 git 版
         run: |
-          if [ "${{ inputs.debug }}" = "true" ]; then
-            haxelib run lime build android -debug
+          haxelib set lime git
+          haxelib set hxcpp git
+          haxelib set flixel git
+          haxelib set flixel-addons git
+          haxelib set flixel-animate git
+          haxelib set hxdiscord_rpc git
+
+      - name: 编译
+        run: |
+          if [ "${{ inputs.experimental }}" == "false" ]; then
+            haxelib run lime build android -final -D ONLY_ARM64 --app-version="$APP_VERSION"
           else
-            haxelib run lime build android -release
+            haxelib run lime build android -final -D ONLY_ARM64 -D COMPILE_EXPERIMENTAL --app-version="$APP_VERSION"
           fi
 
-      - name: 收集产物
-        if: always()
-        run: |
-          mkdir -p out
-          find export -name '*.apk' -exec cp {} out/ \; 2>/dev/null || true
-          ls -lh out/ || true
-
-      - name: 上传 APK
+      - name: 传 APK
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: codename-engine-android
-          path: out/*.apk
+          name: CodenameEngine-Android-${{ env.APP_VERSION }}
+          path: export/release/android/bin/app/build/outputs/apk/release/*
           if-no-files-found: warn
           retention-days: 14
