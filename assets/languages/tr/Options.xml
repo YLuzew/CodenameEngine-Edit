@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<language>
+    <str id="optionsMenu.desc-missing">Açıklama Yok</str>
+
+    <group name="OptionsMenu">
+        <str id="optionsMenu.advanced">Gelişmiş</str>
+        <str id="optionsMenu.header.title">Ayarlar Menüsü</str>
+        <str id="optionsMenu.header.desc">Devam etmek için bir kategori seçin.</str>
+
+        <str id="optionsTree.controls-name">Kontroller</str>
+        <str id="optionsTree.controls-desc">1. ve 2. Oyuncu için kontrolleri değiştirin!</str>
+
+        <str id="optionsTree.gameplay-name">Oynanış</str>
+        <str id="optionsTree.gameplay-desc">Ters akış, nota hızı ve sansür gibi oynanış ayarlarını değiştirin...</str>
+        <str id="optionsTree.gameplay.advanced-desc">Ses akışı gibi daha gelişmiş seçenekleri değiştirin...</str>
+
+        <str id="optionsTree.appearance-name">Görünüm</str>
+        <str id="optionsTree.appearance-desc">Menü efektleri gibi görsel ayarları değiştirin...</str>
+        <str id="optionsTree.appearance.advanced-desc">VRAM öncelikli sprite'lar, kenar yumuşatma ve shader ayarlarını değiştirin.</str>
+
+        <str id="optionsTree.language-name">Dil (Language)</str>
+        <str id="optionsTree.language-desc">Oyunun kullandığı dili değiştirin.</str>
+
+        <str id="optionsTree.miscellaneous-name">Çeşitli</str>
+        <str id="optionsTree.miscellaneous-desc">Kayıt verilerini veya motor ayarlarını sıfırlamak için bu menüyü kullanın.</str>
+
+        <str id="optionsTree.debug-name">Hata Ayıklama (Debug)</str>
+        <str id="optionsTree.debug-desc">Geliştirici modu için hata ayıklama seçenekleri.</str>
+
+        <str id="optionsTree.mobile-name">Mobil Ayarlar</str>
+        <str id="optionsTree.mobile-desc">Mobil kontrollere ilişkin ayarları değiştirin.</str>
+    </group>
+
+    <group name="KeybindOptions" prefix="KeybindsOptions.">
+        <str id="left">Sol</str>
+        <str id="down">Aşağı</str>
+        <str id="up">Yukarı</str>
+        <str id="right">Sağ</str>
+
+        <str id="category.notes">Notalar</str>
+
+        <str id="category.ui">Arayüz</str>
+        <group name="ui" prefix="ui.">
+            <str id="accept">Onayla</str>
+            <str id="back">Geri</str>
+            <str id="reset">Sıfırla</str>
+            <str id="pause">Duraklat</str>
+            <str id="changeMode">Mod Değiştir</str>
+        </group>
+
+        <str id="category.engine">Motor</str>
+        <group name="engine" prefix="engine.">
+            <str id="switchMod">Mod Değiştir</str>
+            <str id="fpsCounter">FPS Sayacı</str>
+        </group>
+
+        <str id="category.volume">Ses</str>
+        <str id="volume.up">Artır</str>
+        <str id="volume.down">Azalt</str>
+        <str id="volume.mute">Sessiz</str>
+
+        <str id="category.developer">Geliştirici</str>
+        <group name="developer" prefix="developer.">
+            <str id="devMenus">Geliştirici Menüleri</str>
+            <str id="openConsole">Konsolu Aç</str>
+            <str id="reloadState">Durumu Yenile</str>
+        </group>
+    </group>
+
+    <group name="AppearanceOptions" prefix="AppearanceOptions.">
+        <str id="framerate-name">Kare Hızı (FPS)</str>
+        <str id="framerate-desc">Saniyedeki kare sayısını belirler.</str>
+
+        <str id="flashingMenu-name">Yanıp Sönen Menüler</str>
+        <str id="flashingMenu-desc">İşaretlenmezse, ana menüdeki parlama efektleri devre dışı kalır ve diğer efektler yavaşlar.</str>
+
+        <str id="colorHealthBar-name">Renkli Can Barı</str>
+        <str id="colorHealthBar-desc">İşaretlenmezse, oyun Week 6'daki orijinal kırmızı/yeşil can barını kullanır.</str>
+
+        <str id="week6PixelPerfect-name">Pixel Perfect Efekti</str>
+        <str id="week6PixelPerfect-desc">İşaretlenirse, Week 6 ve diğer piksel bölümlerinde pikselleri ekrana tam hizalayan efekt aktif olur.</str>
+
+        <group name="AppearanceOptionsAdvanced" prefix="Advanced.">
+            <str id="quality-name">Kalite</str>
+            <str id="quality-desc">Kalite modları: "DÜŞÜK" = Akıcı oyun için tüm ağır efektleri kapatır, "YÜKSEK" = Performans pahasına tüm efektleri açar, "ÖZEL" = Gelişmiş sekmesindeki ayarları kullanır.</str>
+            <str id="quality-low">DÜŞÜK</str>
+            <str id="quality-high">YÜKSEK</str>
+            <str id="quality-custom">ÖZEL</str>
+
+            <str id="antialiasing-name">Kenar Yumuşatma (Antialiasing)</str>
+            <str id="antialiasing-desc">İşaretlenmezse, tüm sprite'larda kenar yumuşatma kapanır. Daha keskin/pikselli görseller karşılığında performansı artırabilir.</str>
+
+            <str id="lowMemoryMode-name">Düşük Bellek Modu</str>
+            <str id="lowMemoryMode-desc">İşaretlenirse, bellek kullanımını azaltmak için sahnelerdeki bazı arka plan ögeleri devre dışı bırakılır.</str>
+
+            <str id="gameplayShaders-name">Oynanış Shader'ları</str>
+            <str id="gameplayShaders-desc">İşaretlenmezse, shader'lar (Thorns'un renk sapması gibi görsel efektler) yüklenmez; bu düşük donanımlı cihazlarda yardımcı olabilir.</str>
+
+            <str id="gpuOnlyBitmaps-name">Sadece VRAM Sprite'ları</str>
+            <str id="gpuOnlyBitmaps-desc">İşaretlenirse, görseller sadece GPU'da depolanır ve çok fazla bellek boşaltır (DENEYSEL). Kapatmak, özellikle büyük görsellerde çok RAM tüketir. Emin değilseniz açık bırakın.</str>
+        </group>
+    </group>
+
+    <group name="MobileOptions" prefix="MobileOptions.">
+        <str id="extraButtons-name">Ekstra Butonlar</str>
+        <str id="extraButtons-desc">Hitbox üzerinde kaç adet ekstra buton olacağını seçin.</str>
+
+        <str id="hitboxAlpha-name">Hitbox Opaklığı</str>
+        <str id="hitboxAlpha-desc">Hitbox'ın ne kadar şeffaf olacağını değiştirin.</str>
+
+        <str id="controlsAlpha-name">Kontrol Opaklığı</str>
+        <str id="controlsAlpha-desc">Mobil kontrollerin ne kadar şeffaf olacağını değiştirin.</str>
+
+        <str id="hitboxType-name">Hitbox Tasarımı</str>
+        <str id="hitboxType-desc">Hitbox'ınızın nasıl görüneceğini seçin!</str>
+
+        <str id="hitboxMode-name">Hitbox Modu</str>
+        <str id="hitboxMode-desc">Hitbox stilinizi seçin! (Şu anlık özel stil eklenemez)</str>
+
+        <str id="hitboxPos-name">Hitbox Konumu</str>
+        <str id="hitboxPos-desc">İşaretlenirse, Hitbox ekranın üstüne yerleştirilir, aksi halde altta kalır.</str>
+
+        <str id="storageType-name">Klasör</str>
+        <str id="storageType-desc">Codename Engine modları hangi klasörde saklansın?\nÖzel klasörler eklenebilir, bunun için android/data yoluna göz atın.</str>
+
+        <str id="storageTypeChange-title">Uyarı: Depolama Türü Değiştirildi!</str>
+        <str id="storageTypeChange-body">Depolama türü değiştirildi.\nBu değişikliğin etkili olması için yeniden başlatma gereklidir.\nÖnceden yüklenmiş tüm modlar, yeniden başlatmanın ardından yeni dizine manuel olarak taşınmalıdır.\n\nOyunu sıfırlamak ve değişiklikleri uygulamak için Tamam'a basın.</str>
+    </group>
+
+    <group name="GameplayOptions" prefix="GameplayOptions.">
+        <str id="downscroll-name">Ters Akış (Downscroll)</str>
+        <str id="downscroll-desc">İşaretlenirse, notalar aşağıdan yukarı yerine yukarıdan aşağıya doğru düşer.</str>
+
+        <str id="ghostTapping-name">Hayalet Tıklama (Ghost Tapping)</str>
+        <str id="ghostTapping-desc">İşaretlenmezse, nota olmayan bir yere basmak ıskalama (miss) sayılır.</str>
+
+        <str id="naughtyness-name">Yetişkin İçerik</str>
+        <str id="naughtyness-desc">İşaretlenmezse, Week 7 ve diğer sahnelerdeki uygunsuz içerikler sansürlenir.</str>
+
+        <str id="camZoomOnBeat-name">Ritmik Kamera Yakınlaşması</str>
+        <str id="camZoomOnBeat-desc">İşaretlenmezse, kameranın her 4 vuruşta bir yakınlaşması durur.</str>
+
+        <str id="autoPause-name">Otomatik Duraklat</str>
+        <str id="autoPause-desc">İşaretlenirse, pencere değiştirildiğinde oyun duraklatılır.</str>
+
+        <str id="volumeMusic-name">Müzik Ses Seviyesi</str>
+        <str id="volumeMusic-desc">Genel ses yerine sadece müziğin sesini değiştirir.</str>
+
+        <str id="volumeSFX-name">Efekt Ses Seviyesi</str>
+        <str id="volumeSFX-desc">Genel ses yerine sadece ses efektlerinin (SFX) sesini değiştirir.</str>
+
+        <str id="songOffset-name">Şarkı Senkron Kayması (Offset)</str>
+        <str id="songOffset-desc">Şarkıların başlama gecikmesini ayarlar.</str>
+
+        <group name="GameplayOptionsAdvanced" prefix="Advanced.">
+            <str id="windowSize-name">Pencere Boyutu</str>
+            <str id="windowSize-desc">...</str>
+
+            <str id="streamedMusic-name">Akışlı Müzik (Streamed)</str>
+            <str id="streamedMusic-desc">İşaretlenirse, müzikler bellekten değil akış üzerinden çalınır. Çok fazla bellek boşaltır ancak CPU kullanımını artırabilir (DENEYSEL). Kapalı olması uzun şarkılarda çok RAM tüketir.</str>
+
+            <str id="streamedVocals-name">Akışlı Vokaller</str>
+            <str id="streamedVocals-desc">İşaretlenirse, vokaller de akış üzerinden çalınır. Çok fazla vokal içeren şarkılarda performansı etkileyebilir (DENEYSEL). Emin değilseniz kapalı bırakın.</str>
+        </group>
+    </group>
+
+    <group name="LanguageOptions" prefix="LanguageOptions.">
+        <str id="language-name">Dil</str>
+        <str id="language-desc">Çeviren: {0} (Versiyon: {1})</str>
+    </group>
+
+    <group name="MiscOptions" prefix="MiscOptions.">
+        <str id="forceCrash-name">Çökmeye Zorla</str>
+        <str id="forceCrash-desc">Oyunu zorla kapatmak/çökertmek için bu seçeneği seçin.</str>
+
+        <str id="betaUpdates-name">Nightly Güncellemeleri</str>
+        <str id="betaUpdates-desc">İşaretlenirse, güncelleme kontrolüne geliştirici sürümleri (gecelik yapılar) de dahil edilir.</str>
+
+        <str id="checkForUpdates-name">Güncellemeleri Denetle</str>
+        <str id="checkForUpdates-desc">Yeni motor güncellemelerini kontrol etmek için bunu seçin.</str>
+        <str id="checkForUpdates-noUpdateFound">Güncelleme bulunamadı.</str>
+
+        <str id="devMode-name">Geliştirici Modu</str>
+        <str id="devMode-desc">İşaretlenirse; özel tuş atamaları, editörler, konsol ve diğer geliştirici özelliklerine erişebilirsiniz.</str>
+
+        <str id="allowConfigWarning-name">Mod Paketi Uyarılarını Göster</str>
+        <str id="allowConfigWarning-desc">İşaretlenirse; eksik yapılandırma veya uyumsuz sürüm gibi mod paketi uyarıları oyun başında gösterilir.</str>
+
+        <str id="resetSaveData-name">Kayıt Verilerini Sıfırla</str>
+        <str id="resetSaveData-desc">Tüm yüksek skorlarınızı ve kayıtlı verilerinizi silmek için bu seçeneği seçin.</str>
+    </group>
+
+    <group name="DebugOptions" prefix="DebugOptions.">
+        <str id="title">Hata Ayıklama Ayarları</str>
+        <str id="desc">Hata ayıklama seçeneklerini yönetmek için bu menüyü kullanın.</str>
+
+        <str id="showConsole-name">Konsolu Göster</str>
+        <str id="showConsole-desc">Oyun hakkındaki günlük (log) bilgilerini içeren hata ayıklama konsolunu açar.</str>
+
+        <str id="editorsResizable-name">Boyutlandırılabilir Editörler</str>
+        <str id="editorsResizable-desc">İşaretlenirse, editörlerin FNF'nin temel 1280x720 çözünürlüğünün ötesinde işlenmesine izin verir (daha fazla alan sağlar).</str>
+
+        <str id="bypassEditorsResize-name">Editör Boyut Sınırını Devre Dışı Bırak</str>
+        <str id="bypassEditorsResize-desc">Editörleri boyutlandırırken minimum çözünürlük sınırını kaldırır (Boyutlandırılabilir Editörler açık olmalıdır).</str>
+
+        <str id="editorSFX-name">Editör Ses Efektleri</str>
+        <str id="editorSFX-desc">İşaretlenirse, editörde çalışırken (örn. kutucukları işaretlerken) ses efektleri çalar.</str>
+
+        <str id="editorCharterPrettyPrint-name">Okunabilir Chart Çıktısı</str>
+        <str id="editorCharterPrettyPrint-desc">İşaretlenirse, chart editöründen kaydedilen dosyalar kolayca incelenebilecek şekilde formatlanır.</str>
+
+        <str id="editorCharacterPrettyPrint-name">Okunabilir Karakter Çıktısı</str>
+        <str id="editorCharacterPrettyPrint-desc">İşaretlenirse, karakter editöründen kaydedilen dosyalar kolayca incelenebilecek şekilde formatlanır.</str>
+
+        <str id="editorStagePrettyPrint-name">Okunabilir Sahne Çıktısı</str>
+        <str id="editorStagePrettyPrint-desc">İşaretlenirse, sahne editöründen kaydedilen dosyalar kolayca incelenebilecek şekilde formatlanır.</str>
+
+        <str id="intensiveBlur-name">Yoğun Bulanıklık</str>
+        <str id="intensiveBlur-desc">İşaretlenirse, daha kaliteli görünen ancak daha fazla sistem kaynağı tüketen yoğun bulanıklık efekti kullanılır.</str>
+
+        <str id="charterAutoSaves-name">Editör Otomatik Kayıt</str>
+        <str id="charterAutoSaves-desc">İşaretlenirse, dosyalarınız aşağıdaki ayarlara göre editörde otomatik olarak yedeklenir.</str>
+
+        <str id="charterAutoSaveTime-name">Otomatik Kayıt Aralığı</str>
+        <str id="charterAutoSaveTime-desc">Editörün dosyanızı kaç saniyede bir kaydedeceğini belirler.</str>
+
+        <str id="charterAutoSaveWarningTime-name">Kayıt Uyarı Süresi</str>
+        <str id="charterAutoSaveWarningTime-desc">Otomatik kayıt yapılmadan kaç saniye önce uyarı verileceğini belirler (0 kapatır).</str>
+
+        <str id="charterAutoSavesSeparateFolder-name">Ayrı Otomatik Kayıt Klasörü</str>
+        <str id="charterAutoSavesSeparateFolder-desc">İşaretlenirse, mevcut dosyanın üzerine yazmak yerine zaman damgalı ayrı bir klasöre kaydeder (song/autosaves/).</str>
+
+        <str id="songOffsetAffectEditors-name">Charter'da Senkron Kayması</str>
+        <str id="songOffsetAffectEditors-desc">İşaretlenirse, Şarkı Senkron Kayması (Offset) seçeneği Chart Editörü'nde de aktif olur.</str>
+    </group>
+
+</language>

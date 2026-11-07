@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<language>
+    <group name="PlayState">
+        <str id="game.score">Skor:{0}</str>
+        <str id="game.misses">Kaçırma:{0}</str>
+        <str id="game.comboBreaks">Kombo Kaybı:{0}</str>
+        <str id="game.accuracy">İsabet:{0} - {1}</str>
+        <str id="game.combo">Kombo:{0}</str>
+
+        <str id="game.rating.[N/A]">[YOK]</str>
+        <str id="game.rating.F">F</str>
+        <str id="game.rating.E">E</str>
+        <str id="game.rating.D">D</str>
+        <str id="game.rating.C">C</str>
+        <str id="game.rating.B">B</str>
+        <str id="game.rating.A">A</str>
+        <str id="game.rating.S">S</str>
+        <str id="game.rating.S++">S++</str>
+    </group>
+
+    <group name="StoryMenu">
+        <str id="story.score">HAFTA SKORU:{0}</str>
+        <str id="story.tracks">ŞARKILAR</str>
+    </group>
+
+    <group name="Freeplay">
+        <str id="freeplay.score">EN YÜKSEK SKOR:{0}</str>
+        <str id="freeplay.solo">Tekli</str>
+        <str id="freeplay.opponentMode">Rakip Modu</str>
+        <str id="freeplay.coopMode">Eşli Oyun (Co-Op)</str>
+        <str id="freeplay.coopModeSwitched">Eşli Oyun (Değiştirildi)</str>
+    </group>
+
+    <group name="Pause">
+        <group name="PauseOptions">
+            <str id="pause.resume">Devam Et</str>
+            <str id="pause.restartSong">Şarkıya Yeniden Başla</str>
+            <str id="pause.changeControls">Kontrolleri Değiştir</str>
+            <str id="pause.changeOptions">Ayarları Değiştir</str>
+            <str id="pause.exitToMenu">Menüye Dön</str>
+            <str id="pause.exitToCharter">Editöre Dön (Charter)</str>
+            <str id="pause.resumeCutscene">Ara Sahneye Devam Et</str>
+            <str id="pause.skipCutscene">Ara Sahneyi Geç</str>
+            <str id="pause.restartCutscene">Ara Sahneyi Başa Sar</str>
+        </group>
+
+        <str id="pause.deathCounter">Maviye Bağlanan: {0}</str>
+        <str id="pause.coopMode">EŞLİ OYUN MODU</str>
+        <str id="pause.opponentMode">RAKİP MODU</str>
+    </group>
+
+    <group name="Credits">
+        <group name="CreditsCodename">
+            <str id="credits.mainDev" notrim="true"> *- Ana geliştirici ekibinin üyesi!*</str>
+            <str id="credits.totalContributions">Toplam Katkı: ~{0}~ / *{1}* (~{2}%~) - GitHub hesabını açmak için seçin</str>
+            <str id="credits.downloadingList">Liste İndiriliyor...</str>
+            <str id="credits.allContributors">Motorun tüm geliştiricileri! - Listeyi güncellemek için SIFIRLA tuşuna basın (2 dakikada bir kez sıfırlanabilir).</str>
+        </group>
+        <group name="CreditsMain">
+            <str id="credits.name">Emeği Geçenler</str>
+            <str id="credits.madePossible">Bunu mümkün kılan kişiler!</str>
+            <str id="credits.selectCodename">Motorun tüm geliştiricilerini görmek için seçin!</str>
+            <str id="credits.selectBase">Bağış yapmak üzere orijinal oyunun itch.io sayfasını açmak için seçin!</str>
+        </group>
+    </group>
+
+    <group name="Mods">
+        <str id="mods.disableMods">Modları Devre Dışı Bırak</str>
+    </group>
+
+    <group name="MainMenu">
+        <str id="mainMenu.commit">Sürüm (Commit): {0} ({1})</str>
+        <str id="mainMenu.openMods">[{0}] Modlar menüsünü aç</str>
+    </group>
+
+    <group name="Updater">
+        <group name="UpdateAvailable">
+            <str id="updateAvailable.title">YENİ GÜNCELLEME</str>
+            <str id="updateAvailable.install">YÜKLE</str>
+            <str id="updateAvailable.skip">ATLA</str>
+        </group>
+        <group name="UpdateScreen">
+            <str id="updateScreen.general-1">Güncelleme kurulumu hazırlanıyor...</str>
+            <str id="updateScreen.part-1">Kurulum klasörü oluşturuluyor ve eski dosyalar temizleniyor...</str>
+
+            <str id="updateScreen.general-2">Güncelleme dosyaları indiriliyor...</str>
+            <str id="updateScreen.part-2">{0} dosyası indiriliyor</str>
+
+            <str id="updateScreen.general-3">Yeni oyun motoru dosyası (executable) indiriliyor...</str>
+            <str id="updateScreen.part-3">{0} indiriliyor</str>
+
+            <str id="updateScreen.general-4">Yeni dosyalar kuruluyor...</str>
+            <str id="updateScreen.part-4">{0} kuruluyor</str>
+        </group>
+    </group>
+
+    <group name="Difficulties">
+        <str id="diff.easy">Kolay</str>
+        <str id="diff.normal">Normal</str>
+        <str id="diff.hard">Zor</str>
+        <str id="diff.erect">Erect</str>
+        <str id="diff.nightmare">Kâbus</str>
+    </group>
+</language>

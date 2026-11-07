@@ -1,0 +1,683 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<language>
+    <group name="General Editor Translations" prefix="editor.">
+        <str id="autosavingIn">{0} saniye içinde otomatik kaydedilecek{1}</str>
+        <str id="autosavingCanceledSuffix">(İptal Edildi)!</str>
+
+        <str id="ok">Tamam</str>
+        <str id="cancel">İptal</str>
+        <str id="save">Kaydet</str>
+        <str id="saveClose">Kaydet ve Kapat</str>
+        <str id="close">Kapat</str>
+        <str id="notNow">Şimdi Değil</str>
+        <str id="yes">Evet</str>
+    </group>
+
+    <group name="UIImageExplorer" prefix="uiImageExplorer.">
+        <str id="symbol">Sembol (Symbol)</str>
+        <str id="animation">Animasyon</str>
+        <str id="atlas">Atlas</str>
+        <str id="spritemap">Sprite Haritası (Spritemap)</str>
+
+        <str id="directory">Dizin ({0}/)</str>
+        <str id="found">{0} {1} Bulundu</str>
+        <str id="foundplural">{0} {1} Bulundu</str>
+        <str id="notFound">#Hiç {0} Bulunamadı#</str>
+        <str id="foundAtlas">{0} Sprite Haritası Bulundu</str>
+        <str id="foundAtlasplural">{0} Sprite Haritası Bulundu</str>
+
+        <str id="fileAlreadyExists">Şu dosyalar zaten mevcut: \n\n{0}\n\nÖNEMLİ: ÜZERİNE YAZMA İŞLEMİ GERİ ALINAMAZ!</str>
+        <str id="override">Dosyaların Üzerine Yaz</str>
+        <str id="useExisting">Mevcut Olanı Kullan</str>
+    </group>
+
+    <group name="EditorPicker" prefix="editor.">
+        <str id="alphabet.name">Alfabe Editörü</str>
+        <str id="chart.name">Chart Editörü</str>
+        <str id="character.name">Karakter Editörü</str>
+        <str id="stage.name">Sahne Editörü</str>
+        <str id="uiDebug.name">Arayüz Hata Ayıklama</str>
+        <str id="wiki.name">Wiki</str>
+        <str id="debugOptions.name">Hata Ayıklama Ayarları</str>
+    </group>
+
+    <group name="ChartEditor">
+        <group name="CharterSelection" prefix="charterSelection.">
+            <str id="desc">Düzenlemek istediğiniz şarkıyı seçin.</str>
+            <str id="acceptSong">Düzenlenecek zorluğu seçmek için ONAYLA tuşuna basın.</str>
+            <str id="acceptVariation">Düzenlenecek varyasyonu seçmek için ONAYLA tuşuna basın.</str>
+            <str id="acceptDifficulty">Seçili zorluğun chart'ını düzenlemek için ONAYLA tuşuna basın.</str>
+            <str id="selectDifficulty">Devam etmek için bir zorluk seçin.</str>
+            <str id="newDifficulty">Yeni Zorluk</str>
+            <str id="newDifficultyDesc">Yeni bir zorluk seviyesi oluşturmak için ONAYLA tuşuna basın.</str>
+            <str id="newSong">Yeni Şarkı</str>
+            <str id="newSongDesc">Yeni bir şarkı oluşturmak için ONAYLA tuşuna basın.</str>
+            <str id="newVariation">Yeni Varyasyon</str>
+            <str id="newVariationDesc">Yeni bir şarkı varyasyonu oluşturmak için ONAYLA tuşuna basın.</str>
+        </group>
+
+        <group name="ChartCreationScreen" prefix="chartCreation.">
+            <str id="title">Yeni Chart Oluşturuluyor</str>
+            <str id="info">Chart Bilgisi</str>
+            <str id="diffName">Zorluk Adı</str>
+            <str id="stage">Sahne (Stage)</str>
+            <str id="scrollSpeed">Akış Hızı (Scroll Speed)</str>
+
+            <str id="strumLineList">Nota Satırları (Strumlines) $* En az 1 satır gereklidir$</str>
+            <str id="strumLine.format">Nota Satırı - #{0}</str>
+
+            <group name="Warnings" prefix="warnings.">
+                <str id="song-exists-title">Şarkı Oluşturma: Hata!</str>
+                <str id="song-exists-body">Oluşturmaya çalıştığınız şarkı zaten mevcut. Üzerine yazmak istiyorsanız önce şarkıyı silin!</str>
+                <str id="chart-exists-title">Chart Oluşturma: Hata!</str>
+                <str id="chart-exists-body">Oluşturmaya çalıştığınız chart zaten mevcut. Üzerine yazmak istiyorsanız önce chart'ı silin!</str>
+            </group>
+        </group>
+
+        <group name="ChartDataScreen" prefix="chartDataScreen.">
+            <str id="title">Chart Özellikleri</str>
+            <str id="editChartData">Chart Verisini Düzenle</str>
+            <str id="stage">Sahne (Stage)</str>
+            <str id="scrollSpeed">Akış Hızı (Scroll Speed)</str>
+        </group>
+
+        <group name="SongPosInfo" prefix="songPosInfo.">
+            <str id="step">Adım (Step): {0}</str>
+            <str id="beat">Vuruş (Beat): {0}</str>
+            <str id="measure">Ölçü (Measure): {0}</str>
+            <str id="bpm">BPM: {0}</str>
+            <str id="timeSignature">Zaman İmzası: {0}/{1}</str>
+        </group>
+
+        <group name="CharterEventScreen" prefix="charterEventScreen.">
+            <str id="title-creating">Etkinlik Grubu Oluştur</str>
+            <str id="title-editing">Etkinlik Grubunu Düzenle</str>
+
+            <str id="noEvent">Etkinlik Yok</str>
+
+            <str id="strumLine.format">Nota Satırı #{0} ({1})</str>
+        </group>
+
+        <group name="CharterEventTypeSelection" prefix="charterEventTypeSelection.">
+            <str id="title">Bir etkinlik türü seçin...</str>
+        </group>
+
+        <group name="CharterMetaDataScreen" prefix="charterMetaDataScreen.">
+            <str id="title">Meta Veriyi Düzenle</str>
+
+            <str id="songData">Şarkı Verisi</str>
+            <str id="songName">Şarkı Adı</str>
+            <str id="variation">Şarkı Varyasyonu</str>
+            <str id="bpm">BPM</str>
+            <str id="timeSignature">Zaman İmzası</str>
+            <str id="menusData">Menü Verileri (Freeplay/Story)</str>
+            <str id="displayName">Görünen Ad</str>
+            <str id="icon">İkon</str>
+            <str id="modesAllowed">İzin Verilen Modlar</str>
+            <str id="color">Renk</str>
+            <str id="difficulties">Zorluklar</str>
+            <str id="customValues">Özel Değerler (Gelişmiş)</str>
+            <str id="needsVoices">Vokal Gerektirir</str>
+
+            <str id="opponentMode">Rakip Modu</str>
+            <str id="coopAllowed">Eşli Oyun (Co-op)</str>
+        </group>
+
+        <group name="CharterNoteTypesList" prefix="charterNoteTypesList.">
+            <str id="title">Nota Türü Listesi Editörü</str>
+
+            <str id="editNoteTypes">Nota Türlerini Düzenle</str>
+            <str id="editType">Nota Türü {0}</str>
+        </group>
+
+        <group name="CharterStrumlineScreen" prefix="charterStrumlineScreen.">
+            <str id="win-title-creating">{0} nota satırı oluşturuluyor</str>
+            <str id="win-title-editing">{0} nota satırı özellikleri düzenleniyor</str>
+
+            <str id="title-creating">Yeni Nota Satırı Oluştur</str>
+            <str id="title-editing">Nota Satırı Özelliklerini Düzenle</str>
+        </group>
+
+        <group name="SongCreationScreen" prefix="songCreationScreen.">
+            <str id="win-title">Yeni Şarkı Oluşturuluyor</str>
+            <str id="win-title-importing">Şarkı İçe Aktarılıyor</str>
+            <str id="title">Şarkı Bilgisi</str>
+
+            <str id="instAudio">Enstrümantal Ses Dosyası $* Zorunlu*$</str>
+            <str id="voicesAudio">Vokal Ses Dosyası</str>
+
+            <str id="importFrom">Şuradan içe aktar...</str>
+            <str id="importSource">İçe Aktarma Kaynağı:</str>
+            <str id="legacyOrPsych">Psych / Orijinal FNF</str>
+            <str id="vslice">V-Slice</str>
+            <str id="vsliceProject">V-Slice Projesi (.fnfc)</str>
+            <str id="importChartFormat">Chart Formatı</str>
+            <str id="importAudios">Sesleri Ekle</str>
+            <str id="songFileName">Şarkı dosya adı $* Zorunlu$</str>
+            <str id="songDataFile">Veri/Chart Dosyası $* Zorunlu$</str>
+            <str id="songMetaFile">Meta Dosyası $* Zorunlu$</str>
+
+            <str id="back">Geri</str>
+            <str id="next">İleri</str>
+        </group>
+
+        <group name="StrumlineOptions" prefix="charterStrumLine.">
+            <str id="characters">Karakterler</str>
+            <str id="newChar">Yeni Karakter</str>
+            <str id="type">Tür</str>
+            <str id="scrollSpeed">Akış Hızı</str>
+            <str id="stagePos">Sahne Konumu</str>
+            <str id="scale">Ölçek (Scale)</str>
+            <str id="spacing">Aralık</str>
+            <str id="hudPos">Arayüz Konumu (X [Oran 0-1], Y)</str>
+            <str id="visible">Görünür?</str>
+            <str id="useChartScrollSpeed">Chart akış hızını mı kullansın?</str>
+            <str id="vocalSuffix">Vokal Soneki (Suffix)</str>
+            <str id="keyCount">Tuş Sayısı</str>
+        </group>
+
+        <group name="ChartEditor" prefix="charter.">
+            <group name="TopBar">
+                <str id="topBar.file">Dosya</str>
+                <group name="FileMenu" prefix="file.">
+                    <str id="new">Yeni</str>
+                    <str id="save">Kaydet</str>
+                    <str id="saveAs">Farklı Kaydet...</str>
+                    <str id="saveGlobalEvents">Genel Etkinlikleri Kaydet</str>
+                    <str id="saveGlobalEventsAs">Genel Etkinlikleri Farklı Kaydet...</str>
+                    <str id="saveNoLocalEvents">Chart'ı Yerel Etkinlikler Olmadan Kaydet</str>
+                    <str id="saveNoLocalEventsAs">Chart'ı Yerel Etkinlikler Olmadan Farklı Kaydet...</str>
+                    <str id="saveMeta">Meta'yı Kaydet</str>
+                    <str id="saveMetaAs">Meta'yı Farklı Kaydet...</str>
+                    <str id="exportFnfLegacy">Orijinal FNF İçin Dışa Aktar...</str>
+                    <str id="exportPsych">Psych Engine İçin Dışa Aktar...</str>
+                    <str id="exit">Çıkış</str>
+                </group>
+
+                <str id="topBar.edit">Düzenle</str>
+                <group name="EditMenu" prefix="edit.">
+                    <str id="undo">Geri Al</str>
+                    <str id="redo">Yinele</str>
+                    <str id="copy">Kopyala</str>
+                    <str id="paste">Yapıştır</str>
+                    <str id="cut">Kes</str>
+                    <str id="delete">Sil</str>
+                    <str id="deletestacked">Üst Üste Binen Notaları Sil</str>
+                </group>
+
+                <str id="topBar.chart">Chart</str>
+                <group name="ChartMenu" prefix="chart.">
+                    <str id="playtest">Oynanış Testi</str>
+                    <str id="playtestHere">Buradan Test Et</str>
+                    <str id="playtestOpponent">Rakip Olarak Test Et</str>
+                    <str id="playtestOpponentHere">Buradan Rakip Olarak Test Et</str>
+                    <str id="enableScripts">Test Sırasında Scriptleri Etkinleştir</str>
+                    <str id="editChartData">Chart Verisini Düzenle</str>
+                    <str id="editMetadata">Meta Veri Bilgisini Düzenle</str>
+                </group>
+
+                <str id="topBar.view">Görünüm</str>
+                <group name="ViewMenu" prefix="view.">
+                    <str id="zoomIn">Yakınlaştır</str>
+                    <str id="zoomOut">Uzaklaştır</str>
+                    <str id="resetZoom">Yakınlaştırmayı Sıfırla</str>
+                    <str id="showSectionsSeparator">Bölüm Ayırıcıyı Göster</str>
+                    <str id="showBeatsSeparator">Vuruş Ayırıcıyı Göster</str>
+                    <str id="showCameraHighlights">Kamera Odaklarını Göster</str>
+                    <str id="rainbowWaveforms">Gökkuşağı Ses Dalgaları</str>
+                    <str id="lowDetailWaveforms">Düşük Detaylı Ses Dalgaları</str>
+                    <str id="scrollLeft">Sola Kaydır</str>
+                    <str id="scrollRight">Sağa Kaydır</str>
+                    <str id="scrollReset">Kaydırmayı Sıfırla</str>
+                </group>
+
+                <str id="topBar.song">Şarkı</str>
+                <group name="SongMenu" prefix="song.">
+                    <str id="goStart">Başa Dön</str>
+                    <str id="goEnd">Sona Git</str>
+                    <str id="addOpponentCamera">Rakibe Kamera Ekle</str>
+                    <str id="addPlayerCamera">Oyuncuya Kamera Ekle</str>
+                    <str id="inst">Enstrümantal</str>
+                    <str id="voices">Vokaller</str>
+                    <str id="hitsounds">Vuruş Sesleri (Hitsounds)</str>
+                </group>
+
+                <group name="BookmarkMenu" prefix="bookmarks.">
+                    <str id="addBookmarkHere">Buraya Yer İşareti Ekle</str>
+                    <str id="editBookmarkList">Yer İşareti Listesini Düzenle</str>
+                    <str id="goTo">"{0}" konumuna git</str>
+                    <str id="createBookmarkTitle">Yeni Yer İşareti Oluşturuluyor...</str>
+                    <str id="createBookmarkName">Yer İşareti Adı:</str>
+                    <str id="createBookmarkColor">Yer İşareti Rengi:</str>
+                    <str id="editBookmarkListTitle">Yer İşareti Listesi</str>
+                    <str id="editBookmarksTitle">Yer İşaretlerini Düzenle</str>
+                    <str id="newBookmarkName">Yeni Yer İşareti</str>
+                    <str id="bookmarkList">Yer İşareti Listesi</str>
+                </group>
+
+                <str id="topBar.note">Nota</str>
+                <group name="NoteMenu" prefix="note.">
+                    <str id="addSustainLength">Uzatma ekle (Sustain)</str>
+                    <str id="subtractSustainLength">Uzatmayı kısalt</str>
+                    <str id="selectAll">Tümünü Seç</str>
+                    <str id="selectMeasure">Ölçüyü Seç</str>
+                    <str id="noteTypesList">Nota Türleri Listesi</str>
+                    <str id="editNoteTypesList">Nota Türleri Listesini Düzenle</str>
+                </group>
+                <str id="topBar.snap">Hizalama</str>
+                <group name="SnapMenu" prefix="snap.">
+                    <str id="increaseSnap">↑ Izgara Hizalamayı Artır</str>
+                    <str id="resetSnap">Hizalamayı Sıfırla</str>
+                    <str id="decreaseSnap">↓ Izgara Hizalamayı Azalt</str>
+
+                    <str id="snap">{0}x Izgara Hizalama</str>
+                </group>
+
+                <str id="topBar.playback">Oynatma</str>
+                <group name="PlaybackMenu" prefix="playback.">
+                    <str id="play">Oynat / Duraklat</str>
+                    <str id="speedRaise">↑ Hız %{0}</str>
+                    <str id="speedReset">Hızı Sıfırla</str>
+                    <str id="speedLower">↓ Hız %{0}</str>
+                    <str id="sectionBack">Bir bölüm geri git</str>
+                    <str id="sectionForward">Bir bölüm ileri git</str>
+                    <str id="sectionStart">Bölümün başına git</str>
+                    <str id="backStep">Bir adım geri git</str>
+                    <str id="forwardStep">Bir adım ileri git</str>
+                    <str id="metronome">Metronom</str>
+                    <str id="visualMetronome">Görsel Metronom</str>
+                </group>
+            </group>
+
+            <group name="NoteTypes" prefix="noteTypes.">
+                <str id="default">Varsayılan Nota</str>
+            </group>
+
+            <group name="EventTypes" prefix="events.">
+                <str id="hscriptCall">HScript Çağrısı</str>
+                <str id="cameraMovement">Kamera Hareketi</str>
+                <str id="addCameraZoom">Kamera Yakınlaştırması Ekle</str>
+                <str id="cameraModuloChange">Kamera Modulo Değişimi</str>
+                <str id="cameraFlash">Kamera Parlaması</str>
+                <str id="bpmChange">BPM Değişimi</str>
+                <str id="scrollSpeedChange">Akış Hızı Değişimi</str>
+                <str id="altAnimationToggle">Alt. Animasyon Geçişi</str>
+                <str id="playAnimation">Animasyon Oynat</str>
+            </group>
+
+            <group name="StrumlineOptions" prefix="strumLine.">
+                <str id="button-name">Ayarlar ↓</str>
+
+                <str id="waveforms">Ses Dalgaları</str>
+                <str id="hitsounds">Vuruş Sesleri</str>
+                <str id="vocals">Vokaller</str>
+                <str id="edit">Düzenle</str>
+                <str id="delete">Sil</str>
+
+                <str id="noWaveform">Ses Dalgaları Yok</str>
+            </group>
+
+            <str id="createNew">Yeni Oluştur</str>
+            <str id="lock-unlock">Kilitle / Kilidi Aç</str>
+
+            <str id="info.localEvents">Yerel Etkinlikler\n(Sadece Bu Zorlukta)</str>
+            <str id="info.globalEvents">Genel Etkinlikler\n(Tüm Zorluklarda)</str>
+            <str id="eventType-local">Yerel Etkinlik</str>
+            <str id="eventType-global">Genel Etkinlik</str>
+
+            <str id="addEvent">Etkinlik Ekle</str>
+            <str id="editEvent">Düzenle</str> 
+            <str id="deleteEvent">Etkinliği Sil</str>
+
+            <group name="Notifications" prefix="popup.">
+                <str id="savedChartAt">Chart kaydedildi: {0}!</str>
+            </group>
+        </group>
+    </group>
+
+    <group name="CharacterEditor">
+        <group name="CharacterSelection" prefix="characterSelection.">
+            <str id="acceptFolder">Bu klasörü düzenlemek için ONAYLA tuşuna basın.</str>
+            <str id="acceptCharacter">Bu karakteri düzenlemek için ONAYLA tuşuna basın.</str>
+            <str id="newCharacter">Yeni Karakter</str>
+            <str id="newCharacterDesc">Yeni bir karakter oluşturmak için ONAYLA tuşuna basın.</str>
+            <str id="desc">Düzenlemek için bir karakter seçin</str>
+            <str id="desc-folder">{0} içindeki karakteri düzenlemek için seçin</str>
+        </group>
+
+        <group name="CharacterInfoScreen" prefix="characterInfoScreen.">
+            <str id="win-title">Karakter Düzenleniyor</str>
+            <str id="title">Karakter Bilgisini Düzenle</str>
+            <str id="icon">İkon</str>
+            <str id="iconColor">İkon Rengi</str>
+            <str id="singDuration">Söyleme Süresi</str>
+            <str id="useSingDuration">Söyleme Süresi Kullanılsın mı?</str>
+            <str id="customValues">Özel Değerler (Gelişmiş)</str>
+        </group>
+
+        <group name="CharacterEditor" prefix="characterEditor.">
+            <group name="TopBar">
+                <str id="topBar.file">Dosya</str>
+                <group name="FileMenu" prefix="file.">
+                    <str id="new">Yeni</str>
+                    <str id="save">Kaydet</str>
+                    <str id="saveAs">Farklı Kaydet...</str>
+                    <str id="exit">Çıkış</str>
+                </group>
+
+                <str id="topBar.edit">Düzenle</str>
+                <group name="EditMenu" prefix="edit.">
+                    <str id="copyOffset">Konum Kaymasını (Offset) Kopyala</str>
+                    <str id="pasteOffset">Konum Kaymasını (Offset) Yapıştır</str>
+                    <str id="undo">Geri Al</str>
+                    <str id="redo">Yinele</str>
+                    <str id="editInfo">Bilgileri Düzenle</str>
+                    <str id="editSprite">Sprite Düzenle</str>
+                </group>
+
+                <str id="topBar.offset">Kaymalar (Offsets)</str>
+                <group name="OffsetsMenu" prefix="offset.">
+                    <str id="moveLeft">Sola Taşı</str>
+                    <str id="moveUp">Yukarı Taşı</str>
+                    <str id="moveDown">Aşağı Taşı</str>
+                    <str id="moveRight">Sağa Taşı</str>
+                    <str id="moveExtraLeft">Hızlı Sola Taşı</str>
+                    <str id="moveExtraUp">Hızlı Yukarı Taşı</str>
+                    <str id="moveExtraDown">Hızlı Aşağı Taşı</str>
+                    <str id="moveExtraRight">Hızlı Sağa Taşı</str>
+                    <str id="dragOffsetsMouse">Fare ile mi Taşınsın?</str>
+                    <str id="clearOffsets">Kaymaları Temizle</str>
+                </group>
+
+                <str id="topBar.stage">Sahne</str>
+                <group name="StageMenu" prefix="stage.">
+                    <str id="useStage">"{0}" Sahnesini Kullan</str>
+                    <str id="useNone">Sahne Kullanma</str>
+                </group>
+
+                <str id="topBar.view">Görünüm</str>
+                <group name="ViewMenu" prefix="view.">
+                    <str id="zoomIn">Yakınlaştır</str>
+                    <str id="zoomOut">Uzaklaştır</str>
+                    <str id="resetZoom">Sıfırla</str>
+                    <str id="charHitbox">Karakter Çarpışma Kutusu (Hitbox)?</str>
+                    <str id="charCam">Karakter Kamerası?</str>
+                    <str id="axis">XY Ekseni?</str>
+                </group>
+
+                <str id="topBar.animation">Animasyon</str>
+                <group name="AnimationMenu" prefix="animation.">
+                    <str id="playAnim">Animasyonu Oynat</str>
+                    <str id="stopAnim">Animasyonu Durdur</str>
+                    <str id="changeAnimUp">Animasyonu Değiştir ↑</str>
+                    <str id="changeAnimDown">Animasyonu Değiştir ↓</str>
+                    <str id="playAnimOnOffset">Kayma Üzerinde Animasyon Oynatılsın mı?</str>
+                </group>
+
+                <group name="CharacterPropertiesWindow" prefix="characterProperties.">
+                    <str id="position">Konum (X, Y)</str>
+                    <str id="scale">Ölçek (Scale)</str>
+                    <str id="editInfo">Bilgileri Düzenle</str>
+                    <str id="editSprite">Sprite Düzenle</str>
+                    <str id="camPosition">Kamera Konumu (X, Y)</str>
+                    <str id="charFlipped">Ters Çevrilmiş?</str>
+                    <str id="antialiased">Kenar Yumuşatma?</str>
+                    <str id="testCharAs">Karakteri Şöyle Test Et...</str>
+                    <str id="charDesign">Karakter Tasarım Rolü...</str>
+                </group>
+
+                <group name="CharacterAnimButton" prefix="characterAnim.">
+                    <str id="defaultAnimName">Yeni Anim</str>
+                    <str id="name">Ad</str>
+                    <str id="anim">Animasyon</str>
+                    <str id="position">Konum (X, Y)</str>
+                    <str id="fps">FPS</str>
+                    <str id="indices">İndeksler (Kareler)</str>
+                    <str id="looping">Döngüsel mi?</str>
+                    <str id="label">Etiket (Label)</str>
+                </group>
+
+                <group name="CharacterSpriteScreen" prefix="characterSpriteScreen.">
+                    <str id="win-title">Karakter sprite'ını düzenle</str>
+                    <str id="charImageFile">Karakter Resim Dosyası $* Zorunlu$</str>
+                </group>
+            </group>
+        </group>
+
+        <group name="CharacterCreationScreen" prefix="characterCreationScreen.">
+            <str id="win-title">Yeni Karakter Oluşturuluyor</str>
+            <str id="charName">Karakter Adı $* Zorunlu$</str>
+            <str id="charImgName">Resim Dosyası Adı $* Zorunlu$</str>
+
+            <group name="Warnings" prefix="warnings.">
+                <str id="char-exists-title">Karakter Oluşturma: Hata!</str>
+                <str id="char-exists-body">Oluşturmaya çalıştığınız karakter zaten mevcut. Üzerine yazmak istiyorsanız önce karakteri silin!</str>
+            </group>
+        </group>
+    </group>
+
+    <group name="AlphabetEditor" prefix="editor.alphabet.">
+        <group name="AlphabetSelection" prefix="selection.">
+            <str id="acceptTypeface">Bu yazı tipini (typeface) düzenlemek için ONAYLA tuşuna basın.</str>
+            <str id="newTypeface">Yeni Yazı Tipi</str>
+            <str id="newTypefaceDesc">Yeni bir yazı tipi oluşturmak için ONAYLA tuşuna basın.</str>
+            <str id="desc">Düzenlemek için bir yazı tipi seçin</str>
+
+            <group name="Warnings" prefix="warnings.">
+                <str id="notImplemented-title">Yeni Yazı Tipi: Özellik Henüz Eklenmedi!</str>
+                <str id="notImplemented-body">Bu özellik henüz geliştirilme aşamasındadır. Gelecek Codename Engine güncellemelerini bekleyin.\n\n\n- Codename Ekibi</str>
+            </group>
+        </group>
+
+        <group name="AlphabetEditor">
+            <group name="TopBar">
+                <str id="topBar.file">Dosya</str>
+                <group name="FileMenu" prefix="file.">
+                    <str id="new">Yeni</str>
+                    <str id="save">Kaydet</str>
+                    <str id="saveAs">Farklı Kaydet...</str>
+                    <str id="exit">Çıkış</str>
+                </group>
+
+                <str id="topBar.edit">Düzenle</str>
+                <group name="EditMenu" prefix="edit.">
+                    <str id="undo">Geri Al</str>
+                    <str id="redo">Yinele</str>
+                </group>
+
+                <str id="topBar.glyph">Glif (Glyph)</str>
+                <group name="GlyphMenu" prefix="glyph.">
+                    <str id="newGlyph">Yeni Glif</str>
+                    <str id="editGlyph">Glifi Düzenle</str>
+                    <str id="deleteGlyph">Glifi Sil</str>
+                    <str id="deleteCurGlyph">Mevcut Glifi Sil</str>
+                </group>
+
+                <str id="topBar.offset">Kaymalar</str>
+                <group name="OffsetsMenu" prefix="offset.">
+                    <str id="moveLeft">Sola Taşı</str>
+                    <str id="moveUp">Yukarı Taşı</str>
+                    <str id="moveDown">Aşağı Taşı</str>
+                    <str id="moveRight">Sağa Taşı</str>
+                    <str id="moveExtraLeft">Hızlı Sola Taşı</str>
+                    <str id="moveExtraUp">Hızlı Yukarı Taşı</str>
+                    <str id="moveExtraDown">Hızlı Aşağı Taşı</str>
+                    <str id="moveExtraRight">Hızlı Sağa Taşı</str>
+                    <str id="clearOffsets">Kaymaları Temizle</str>
+                </group>
+
+                <str id="topBar.view">Görünüm</str>
+                <group name="ViewMenu" prefix="view.">
+                    <str id="zoomIn">Yakınlaştır</str>
+                    <str id="zoomOut">Uzaklaştır</str>
+                    <str id="resetZoom">Sıfırla</str>
+                </group>
+            </group>
+        </group>
+    </group>
+
+    <group name="StageEditor">
+        <group name="StageSelection" prefix="stageSelection.">
+            <str id="desc">Düzenlemek için bir sahne seçin. Sadece HSCRIPT kullanan sahneler desteklenmez.</str>
+            <str id="acceptStage">Bu sahneyi düzenlemek için ONAYLA tuşuna basın.</str>
+            <str id="newStage">Yeni Sahne</str>
+            <str id="acceptNewStage">Yeni bir sahne oluşturmak için ONAYLA tuşuna basın.</str>
+        </group>
+
+        <group name="StageEditor" prefix="stageEditor.">
+            <group name="TopBar">
+                <str id="topBar.file">Dosya</str>
+                <group name="FileMenu" prefix="file.">
+                    <str id="save">Kaydet</str>
+                    <str id="saveAs">Farklı Kaydet...</str>
+                    <str id="exit">Çıkış</str>
+                </group>
+
+                <str id="topBar.edit">Düzenle</str>
+                <group name="EditMenu" prefix="edit.">
+                    <str id="undo">Geri Al</str>
+                    <str id="redo">Yinele</str>
+                    <str id="editStageInfo">Sahne Bilgisini Düzenle</str>
+                </group>
+
+                <str id="topBar.select">Seçim</str>
+                <group name="SelectionMenu" prefix="select.">
+                    <str id="all">Tümünü Seç</str>
+                    <str id="deselect">Seçimi Kaldır</str>
+                    <str id="inverse">Seçimi Tersine Çev</str>
+                </group>
+
+                <str id="topBar.view">Görünüm</str>
+                <group name="ViewMenu" prefix="view.">
+                    <str id="zoomIn">Yakınlaştır</str>
+                    <str id="zoomOut">Uzaklaştır</str>
+                    <str id="zoomReset">Sıfırla</str>
+                    <str id="focusDad">Rakibe Odaklan</str>
+                    <str id="focusGF">GF'ye Odaklan</str>
+                    <str id="focusBF">Oyuncuya Odaklan</str>
+                </group>
+
+                <str id="topBar.editor">Editör</str>
+                <group name="EditorMenu" prefix="editor.">
+                    <str id="showCharacters">Karakterleri Göster</str>
+                </group>
+
+                <group name="StageSpriteScreen" prefix="stageSpriteScreen.">
+                    <str id="win-title">Sahne sprite'ını düzenle</str>
+                    <str id="stageImageFile">Resim Dosyası $* Zorunlu$</str>
+                </group>
+            </group>
+        </group>
+
+        <group name="StageCreationScreen" prefix="stageCreationScreen.">
+            <str id="win-title">Yeni Sahne Oluşturuluyor</str>
+            <str id="title">Sahne Bilgisi</str>
+            <str id="stageName">Sahne Adı</str>
+            <str id="stagePath">Sahne Yolu (Path)</str>
+
+            <group name="Warnings" prefix="warnings.">
+                <str id="stage-exists-title">Sahne Oluşturma: Hata!</str>
+                <str id="stage-exists-body">Oluşturmaya çalıştığınız sahne zaten mevcut. Üzerine yazmak istiyorsanız önce sahneyi silin!</str>
+            </group>
+        </group>
+
+        <group name="StageInfoScreen" prefix="stageInfoScreen.">
+            <str id="win-title">"{0}" Sahnesi Bilgileri Düzenleniyor</str>
+            <str id="title">Sahne Bilgisi</str>
+            <str id="stageName">Sahne Adı</str>
+            <str id="spritePath">Sprite Yolu\n(Yenileme Gerekir)</str>
+            <str id="startCamPos">Başlangıç Kamera Konumu (X, Y)</str>
+            <str id="zoom">Yakınlaştırma (Zoom)</str>
+        </group>
+
+        <group name="StageElementEditScreen" prefix="stageElementEditScreen.">
+            <str id="win-character-title">"{0}" Karakteri Düzenleniyor</str>
+            <str id="win-sprite-title">"{0}" Sprite'ı Düzenleniyor</str>
+            <str id="win-title">XML Düzenleniyor: &lt;{0} /&gt;</str>
+
+            <str id="character-title">Karakter Verisi</str>
+            <str id="sprite-title">Sprite Verisi</str>
+            <str id="title">XML Verisi</str>
+
+            <str id="elementName">Öge Adı</str>
+            <str id="nameID">Ad Tanımlayıcı</str>
+            <str id="imageFile">Resim Dosyası (Geliştiriliyor: Yenileme gerekir)\nŞurada: (${stage.spritesParentFolder})</str>
+            <str id="scroll">Kaydırma (Scroll) {0}</str>
+            <str id="scale">Ölçek (Scale) {0}</str>
+            <str id="camera">Kamera {0}</str>
+            <str id="spacing">Aralık (X, Y)</str>
+            <str id="skew">Eğme (Skew) {0}</str>
+            <str id="alpha">Opaklık (Alpha)</str>
+            <str id="angle">Açı</str>
+            <str id="zoomFactor">Yakınlaştırma Çarpanı</str>
+            <str id="positionName">Konum Adı</str>
+            <str id="flipX">X Ekseni Ters Çevir</str>
+            <str id="antialiasing">Kenar Yumuşatma</str>
+            <str id="highMemory">Yüksek Bellek</str>
+            <str id="lowMemory">Düşük Bellek</str>
+            <str id="attributes">Öznitelikler (Attributes)</str>
+            <str id="transformPreview">Dönüşüm Önizleme:</str>
+
+            <str id="animType">Animasyon Türü</str>
+            <group name="AnimTypeDropdown" prefix="animType.">
+                <str id="none">YOK</str>
+                <str id="beat">VURUŞ (BEAT)</str>
+                <str id="loop">DÖNGÜ (LOOP)</str>
+            </group>
+            <str id="tipCustomProperties">İpucu: Özel özelliklere erişmek için\ndüzenleye basarken Shift tuşuna basılı tutun.</str>
+        </group>
+
+        <group name="StageXMLEditScreen" prefix="stageXMLEditScreen.">
+            <str id="win-title">{0} XML Düzenleniyor</str>
+            <str id="title">Xml Verisi</str>
+            <str id="attributes">Öznitelikler</str>
+        </group>
+
+        <str id="stageCharacters.requiredPosition">Bu karakter konumu sahnelerde zorunludur!</str>
+        <str id="stageCharacters.noDeleteGirlfriend">Girlfriend'i silemezsiniz</str>
+
+        <group name="StageElement" prefix="stageElement.">
+            <str id="scale">Ölçek: {0}, {1}</str>
+            <str id="scroll">Kaydırma: {0}, {1}</str>
+        </group>
+
+        <group name="StageSprites" prefix="stageSprites.">
+            <str id="win-title">Sahne Sprite'ları</str>
+            <str id="sprite">Sprite</str>
+            <str id="box">Kutu</str>
+            <str id="character">Karakter</str>
+            <str id="warnings.not-implemented">Kutu oluşturma henüz eklenmedi!</str>
+        </group>
+    </group>
+
+    <group name="PlayTesting" prefix="playtesting.">
+        <str id="chartPlaytesting" notrim="true"> (Chart Test Ediliyor)</str>
+        <str id="exitGame">Oyundan Çık</str>
+        <str id="exitToMenu">Menüye Dön</str>
+        <str id="saveAndExitGame">Kaydet ve Oyundan Çık</str>
+        <str id="saveAndExitToMenu">Kaydet ve Menüye Dön</str>
+        <str id="cancel">İptal</str>
+
+        <str id="warningTitle">KAYDEDİLMEMİŞ DEĞİŞİKLİKLER!</str>
+        <str id="warningDesc">Değişiklikleri kaydetmezseniz *kaybolacaktır* (Geri getirilemez).\n\n\nİptal etmek ister misiniz?</str>
+    </group>
+
+    <group name="SaveWarning" prefix="saveWarning.">
+        <str id="warningTitle">Kaydedilmemiş Değişiklikler!</str>
+        <str id="warningDesc">Değişiklikleri kaydetmezseniz kaybolacaktır (Geri getirilemez).\n\n\nİptal etmek ister misiniz?</str>
+
+        <str id="exitGame">Oyundan Çık</str>
+        <str id="exitToMenu">Menüye Dön</str>
+        <str id="saveAndExitGame">Kaydet ve Oyundan Çık</str>
+        <str id="saveAndExitToMenu">Kaydet ve Menüye Dön</str>
+        <str id="cancel">İptal</str>
+    </group>
+
+    <group name="ModConfigWarning" prefix="modConfigWarning.">
+        <str id="warningTitle">Eksik mod klasörü yapılandırması!</str>
+        <str id="warningDesc">Modunuzda şu an bir mod yapılandırma (config) dosyası eksik!\n\nOtomatik olarak bir tane oluşturulsun mu?\n\n(Not: Bu mod size ait değilse, bu uyarının çıkmaması için Geliştirici modunu kapatın.)</str>
+
+        <str id="createdTitle">Mod yapılandırması oluşturuldu!</str>
+        <str id="createdDesc">Mod yapılandırma dosyanız şu konumda oluşturuldu: {0}!</str>
+    </group>
+</language>
