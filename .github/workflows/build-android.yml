@@ -79,10 +79,15 @@ jobs:
           haxe -cp commandline -D analyzer-optimize --run Main setup --lib=building/libs-mobile.xml
 
       - name: 写 lime 配置
+        # lime 判定的三个键名是 ANDROID_SETUP / ANDROID_SDK / ANDROID_NDK_ROOT（不是 ANDROID_SDK_ROOT）。
+        # AndroidPlatform.hx:110 先查 ANDROID_SETUP，缺了就报「You need to run lime setup android」。
         run: |
-          haxelib run lime config ANDROID_SDK_ROOT "$ANDROID_SDK_ROOT" || true
-          haxelib run lime config ANDROID_NDK_ROOT "$ANDROID_NDK_ROOT" || true
-          haxelib run lime config JAVA_HOME "$JAVA_HOME" || true
+          haxelib run lime config ANDROID_SETUP true
+          haxelib run lime config ANDROID_SDK "$ANDROID_SDK_ROOT"
+          haxelib run lime config ANDROID_NDK_ROOT "$ANDROID_NDK_ROOT"
+          haxelib run lime config JAVA_HOME "$JAVA_HOME"
+          echo "--- ~/.lime/config.json ---"
+          cat ~/.lime/config.json || true
 
       - name: 编译 APK
         run: |
