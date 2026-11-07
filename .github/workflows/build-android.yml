@@ -78,6 +78,18 @@ jobs:
           haxelib setup ~/haxelib
           haxe -cp commandline -D analyzer-optimize --run Main setup --lib=building/libs-mobile.xml
 
+      - name: 修 openfl 分支
+        # libs-mobile.xml 把 openfl 钉在 CodenameCrew/cne-openfl 的 old 分支，
+        # 而 old 分支的 openfl.geom.Matrix3D 没有 transformVectorToOutput、
+        # Vector3D 没有 crossProductToOutput —— foxlite 是拿这两个方法编译的，直接报错：
+        #   openfl.geom.Matrix3D has no field transformVectorToOutput
+        # only master 分支有这两个方法。这里换成 master 再编。
+        run: |
+          haxelib git openfl https://github.com/CodenameCrew/cne-openfl master
+          echo "--- 确认方法存在 ---"
+          grep -c "transformVectorToOutput" ~/haxelib/openfl/git/src/openfl/geom/Matrix3D.hx || true
+          grep -c "crossProductToOutput" ~/haxelib/openfl/git/src/openfl/geom/Vector3D.hx || true
+
       - name: 写 lime 配置
         # lime 判定的三个键名是 ANDROID_SETUP / ANDROID_SDK / ANDROID_NDK_ROOT（不是 ANDROID_SDK_ROOT）。
         # AndroidPlatform.hx:110 先查 ANDROID_SETUP，缺了就报「You need to run lime setup android」。
