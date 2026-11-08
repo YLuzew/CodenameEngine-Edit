@@ -52,9 +52,21 @@ jobs:
           echo "版本: $APP_VERSION"
 
       - name: Haxe
+        id: setup_haxe
         uses: krdlab/setup-haxe@v2
+        continue-on-error: true
         with:
           haxe-version: ${{ env.HAXE_VERSION }}
+
+      - name: Haxe 兜底（绕开 GitHub Releases 504）
+        if: steps.setup_haxe.outcome == 'failure'
+        run: |
+          echo "::warning::setup-haxe 失败（上游 Releases 504），改用 apt 源装 haxe/neko"
+          sudo apt-get update -qq
+          sudo apt-get install -y haxe neko
+          haxe -version
+          neko -version || true
+          echo "haxe=$(which haxe)  haxelib=$(which haxelib)"
 
       - name: Android NDK r25c
         id: setup-ndk
