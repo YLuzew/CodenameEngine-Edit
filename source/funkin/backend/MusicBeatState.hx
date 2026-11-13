@@ -254,6 +254,19 @@ class MusicBeatState extends FlxState implements IBeatCancellableReceiver
 					stateScripts.add(script);
 					script.load();
 				}
+				// ===== [IC-EDIT] 兼容「单文件」state 脚本 data/states/<StateName>.hx =====
+				// 原版只认 data/states/<StateName>/LIB_<modName>.hx（由 ModsFolderLibrary.__parseAsset
+				// 重写成 <StateName>.hx），但绝大多数模组用的是单文件结构，
+				// 结果 LIB_ 拼出来的路径永远不存在 → DummyScript → 自定义 state 全黑。
+				if (stateScripts.scripts.length == 0) {
+					var plainPath = Paths.script('data/states/${scriptName}');
+					var plainScript = Script.create(plainPath);
+					if (!(plainScript is DummyScript)) {
+						plainScript.remappedNames.set(plainScript.fileName, plainScript.fileName);
+						stateScripts.add(plainScript);
+						plainScript.load();
+					}
+				}
 			}
 			#if EXPERMENTAL_SCRIPT_RELOADING
 			else stateScripts.reload();
