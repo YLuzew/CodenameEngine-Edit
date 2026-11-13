@@ -42,15 +42,13 @@ class Paths
 	// 默认跟随 PATHS_CACHE_RESET_ON_SWITCH_STATE 一起清。
 	// ------------------------------------------------------------------
 	static var __existingPathCache:Map<String, String> = [];
-	static var __existingPathMiss:Map<String, Bool> = [];
 
 	public static function resetExistingPathCache():Void {
 		__existingPathCache.clear();
-		__existingPathMiss.clear();
 	}
 
 	@:noCompletion public static function getExistingPathCacheStats():String {
-		return 'hit=${Lambda.count(__existingPathCache)} miss=${Lambda.count(__existingPathMiss)}';
+		return 'hit=${Lambda.count(__existingPathCache)}';
 	}
 
 	static inline function __cacheHit(key:String, v:String):String {
@@ -61,7 +59,6 @@ class Paths
 	static function getExistingPath(path:String, prefix:String, nullFail:Bool):Null<String> {
 		final cacheKey = (nullFail ? "1" : "0") + "|" + prefix + path;
 		if (__existingPathCache.exists(cacheKey)) return __existingPathCache.get(cacheKey);
-		if (__existingPathMiss.exists(cacheKey)) return null;
 
 		var fixedPath = prefix + path;
 
@@ -85,7 +82,7 @@ class Paths
 				}
 
 				if (!pass) {
-					if (nullFail) { __existingPathMiss.set(cacheKey, true); return null; }
+					if (nullFail) return null;
 					else fixedPath += part;
 				}
 			}
@@ -97,7 +94,6 @@ class Paths
 		if (!nullFail || Assets.exists(fixedPath)) return __cacheHit(cacheKey, fixedPath);
 		#end
 
-		__existingPathMiss.set(cacheKey, true);
 		return null;
 	}
 
