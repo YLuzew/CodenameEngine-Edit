@@ -42,13 +42,16 @@ class Paths
 	// 默认跟随 PATHS_CACHE_RESET_ON_SWITCH_STATE 一起清。
 	// ------------------------------------------------------------------
 	static var __existingPathCache:Map<String, String> = [];
+	// [IC-EDIT] 未命中单独一张表：Map.get 拿不到 null 与「不存在」的区别
+	static var __existingPathMiss:Map<String, Bool> = [];
 
 	public static function resetExistingPathCache():Void {
 		__existingPathCache.clear();
+		__existingPathMiss.clear();
 	}
 
 	@:noCompletion public static function getExistingPathCacheStats():String {
-		return 'hit=${Lambda.count(__existingPathCache)}';
+		return 'hit=${Lambda.count(__existingPathCache)} miss=${Lambda.count(__existingPathMiss)}';
 	}
 
 	static inline function __cacheHit(key:String, v:String):String {
@@ -56,9 +59,15 @@ class Paths
 		return v;
 	}
 
+	static inline function __cacheMiss(key:String):Null<String> {
+		__existingPathMiss.set(key, true);
+		return null;
+	}
+
 	static function getExistingPath(path:String, prefix:String, nullFail:Bool):Null<String> {
 		final cacheKey = (nullFail ? "1" : "0") + "|" + prefix + path;
 		if (__existingPathCache.exists(cacheKey)) return __existingPathCache.get(cacheKey);
+		if (__existingPathMiss.exists(cacheKey)) return null;
 
 		var fixedPath = prefix + path;
 
@@ -82,7 +91,7 @@ class Paths
 				}
 
 				if (!pass) {
-					if (nullFail) return null;
+					if (nullFail) return __cacheMiss(cacheKey);
 					else fixedPath += part;
 				}
 			}
@@ -94,7 +103,7 @@ class Paths
 		if (!nullFail || Assets.exists(fixedPath)) return __cacheHit(cacheKey, fixedPath);
 		#end
 
-		return null;
+		return __cacheMiss(cacheKey);
 	}
 
 	public static function getPath(file:String, ?library:String, ?exts:OneOfTwo<String, Array<String>>) {
