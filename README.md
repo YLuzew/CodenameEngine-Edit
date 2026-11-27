@@ -1,6 +1,6 @@
 # CodenameEngine-Edit
 
-Codename Engine（CNE）的一份可编译副本，改动集中在 **Android 进歌加载性能** 与 **模组自定义 state 加载**，附带一条能直接出 APK 的 GitHub Actions 流水线。
+Codename Engine（CNE）的一份可编译副本，改动集中在 **Android 进歌加载性能**、**模组自定义 state 加载** 与 **移动端触摸板体系**，附带一条能直接出 APK 的 GitHub Actions 流水线。
 
 上游基线：[`azmlpoh/CodenameEngine-Mobile`](https://github.com/azmlpoh/CodenameEngine-Mobile)（移动端维护者的仓库，不是官方；官方是 [`CodenameCrew/CodenameEngine`](https://github.com/CodenameCrew/CodenameEngine)）。
 
@@ -111,6 +111,34 @@ if (stateScripts.scripts.length == 0) {
 ```
 
 一次修所有模组，不动模组文件。`LIB_` 布局仍然优先，向后兼容。
+
+### 1.6 移动端触摸板体系（照搬 dustin-build）
+
+原来只有 `mobile-controls`（橙子 fork，`mobile.flixel.controls`）那套 JSON 控件。现在整套搬入 [`QQQEB159/dustin-build`](https://github.com/QQQEB159/dustin-build) 的 `mobile.objects` 体系，两者并存、互不替换：
+
+- `source/mobile/objects/`：`TouchPad` / `TouchButton` / `Hitbox` / `MobileControls` / `IMobileControls` / `Alphabet`
+- `source/mobile/funkin/backend/`：`utils/MobileData`、`utils/TouchUtil`、`system/input/MobileInputManager`、`system/input/MobileInputID`、`system/MobileControlSelectSubState`
+- `assets/mobile/`：`ActionModes/`、`DPadModes/`、`images/touchpad/`、`images/virtualpad/`、`images/keyboard.png`
+- `assets/images/`：`alphabet.png/.xml`、`campaign_menu_UI_assets.png/.xml`（Pad-Custom 界面用）
+
+开启方式：`project.xml` 的 `<define name="TOUCH_CONTROLS" if="mobile || web" />`，`MainState` 里调 `MobileData.init()`。
+
+**`Controls.hx` 一行没改。** 它与 dustin 那份差异过大（513 行 vs 1056 行），整份替换会把输入层推翻；改为在 `source/mobile/flixel/controls/MobileControls.hx` 的 `checkState()` 里用 `checkTouchControls()` 桥接 `MobileInputManager`，`checkMobile("NOTE_LEFT")` 就能查到触摸板按键。
+
+游玩方式在 设置 → Mobile → **Play Mode**（值存 `Options.mobileControlMode`，并同步进 `MobileData.mode`）：
+
+| 值 | 名称 | 说明 |
+| --- | --- | --- |
+| 0 | Pad-Right | 右下角方向键（`RIGHT_FULL`） |
+| 1 | Pad-Left | 左下角方向键（`LEFT_FULL`） |
+| 2 | Pad-Custom | 拖动自定义，位置存进 `MobileData.save` |
+| 3 | Hitbox | 判定线四键（默认） |
+
+拖动界面是 dustin 原版 `MobileControlSelectSubState`，入口在设置主菜单的 **Pad Customize**（`OptionCategory.substate` 必须传函数式，传 Class 会被 `Type.createInstance(..., [name, desc])` 强塞两个构造参数）。
+
+其余照搬的选项：`Hitbox Opacity`（0–100）、`Pad Opacity`（0–100）、`Old Pad Texture`（切 `virtualpad` 老皮）、`Hitbox Design`（noGradient / noGradientOld / gradient / hidden）、`Hitbox Position`。
+
+**包名**：`com.yoshman29.codenameengine` → `com.luzew.codename.edit`（`project.xml` 两处 + `source/mobile/backend/MobileUtil.hx` 五处路径）。Android 视为全新应用，旧存档与模组目录要手动搬。
 
 ### 未改动
 
