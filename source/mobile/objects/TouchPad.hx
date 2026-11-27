@@ -201,15 +201,20 @@ class TouchPad extends MobileInputManager implements IMobileControls
 			}
 
 			button.label = new FlxSprite();
-			// arrow* 是「官方手机版」那套：直接用判定线图集 game/notes/default 里的箭头帧当触摸键
+			// arrow* 是「官方手机版」那套：直接用判定线图集 game/notes/default 的箭头帧。
+			// 动画名与 StrumLine.createStrum 完全一致：static = arrowLEFT，pressed = left press
 			final isArrow:Bool = Graphic.toUpperCase().startsWith("ARROW");
 			if (isArrow)
 			{
 				final dir:String = Graphic.substr(5).toUpperCase();
 				button.frames = Paths.getFrames('game/notes/default');
-				button.animation.addByPrefix('idle', 'arrow' + dir, 24, false);
-				button.animation.play('idle');
-				button.scale.set(0.95, 0.95);
+				button.animation.destroyAnimations(); // 清掉构造时 loadDefaultGraphic 留下的 normal/pressed
+				button.animation.addByPrefix('static', 'arrow' + dir, 24, false);
+				button.animation.addByPrefix('pressed', dir.toLowerCase() + ' press', 24, false);
+				button.animation.play('static');
+				button.setGraphicSize(Std.int(button.width * funkin.backend.system.Flags.DEFAULT_NOTE_SCALE),
+					Std.int(button.height * funkin.backend.system.Flags.DEFAULT_NOTE_SCALE));
+				button.statusAnimations = ['static', 'static', 'pressed'];
 				button.label.visible = false;
 			}
 			else
