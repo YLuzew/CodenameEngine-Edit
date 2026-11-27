@@ -9,8 +9,8 @@
 
 	<app
 		title="Codename Engine" main="funkin.backend.system.Main"
-		file="CodenameEngine" packageName="com.yoshman29.codenameengine"
-		package="com.yoshman29.codenameengine"
+		file="CodenameEngine" packageName="com.luzew.codename.edit"
+		package="com.luzew.codename.edit"
 		version="1.0.1" company="Yoshman29" />
 
 	<!--

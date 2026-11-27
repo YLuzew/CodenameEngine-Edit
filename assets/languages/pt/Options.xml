@@ -29,6 +29,8 @@
 
 		<str id="optionsTree.mobile-name">Opções Móveis</str>
 		<str id="optionsTree.mobile-desc">Altere as opções relacionadas a dispositivos móveis ou controles de toque.</str>
+		<str id="optionsTree.padCustomize-name">Personalizar Pad</str>
+		<str id="optionsTree.padCustomize-desc">Arraste os botões do pad de toque e salve ao sair.</str>
 
 	</group>
 

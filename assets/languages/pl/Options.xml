@@ -25,6 +25,8 @@
 
 		<str id="optionsTree.mobile-name">Opcje Mobilne</str>
 		<str id="optionsTree.mobile-desc">Zmień opcje związane z urządzeniami mobilnymi lub sterowaniem dotykowym.</str>
+		<str id="optionsTree.padCustomize-name">Dostosuj Pad</str>
+		<str id="optionsTree.padCustomize-desc">Przeciągnij przyciski pada dotykowego i zapisz przy wyjściu.</str>
 	</group>
 
 	<group name="KeybindOptions" prefix="KeybindsOptions.">

@@ -29,6 +29,8 @@
 
         <str id="optionsTree.mobile-name">Mobil Ayarlar</str>
         <str id="optionsTree.mobile-desc">Mobil kontrollere ilişkin ayarları değiştirin.</str>
+        <str id="optionsTree.padCustomize-name">Pad Özelleştir</str>
+        <str id="optionsTree.padCustomize-desc">Dokunmatik pad butonlarını sürükleyip çıkışta kaydet.</str>
     </group>
 
     <group name="KeybindOptions" prefix="KeybindsOptions.">
