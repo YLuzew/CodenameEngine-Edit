@@ -831,10 +831,33 @@
 				var strScale:Float = strumLine.strumScale != null ? strumLine.strumScale : 1;
 				var strSpacing:Float = strumLine.strumSpacing == null ? 1 : strumLine.strumSpacing;
 				var keyCount:Int = strumLine.keyCount == null ? 4 : strumLine.keyCount;
+				var strYPos:Float = this.strumLine.y;
+
+				#if TOUCH_CONTROLS
+				// 官方手机版（Mode 4 / Arrows）：玩家键位放大贴底居中，对手键位缩小挪到左上角。
+				// 照搬 FunkinCrew/Funkin PlayState.initNoteHitbox()，必须在 StrumLine 构造前算好。
+				if (mobile.funkin.backend.utils.MobileData.mode == 4) {
+					final amplification:Float = (FlxG.width / FlxG.height) / (FlxG.initialWidth / FlxG.initialHeight);
+					if (strumLine.type == 1) {
+						strScale = ((FlxG.height / FlxG.width) * 1.95) * amplification;
+						strSpacing = ((FlxG.height / FlxG.width) * 2.8) * amplification;
+						strOffset = 0.5;
+						strYPos = (FlxG.height - Note.swagWidth * strScale) * 0.95;
+					} else {
+						strScale = 0.4 * amplification;
+						strOffset = 0.06;
+						strYPos = 15;
+					}
+					// 写回谱面数据，StrumLine 内部创建 strum 时读的是这两个字段
+					strumLine.strumScale = strScale;
+					strumLine.strumSpacing = strSpacing;
+				}
+				#end
+
 				var strXPos:Float = StrumLine.calculateStartingXPos(strOffset, strScale, strSpacing, keyCount);
 				var startingPos:FlxPoint = strumLine.strumPos != null ?
 					FlxPoint.get(strumLine.strumPos[0] == 0 ? strXPos : strumLine.strumPos[0], strumLine.strumPos[1]) :
-					FlxPoint.get(strXPos, this.strumLine.y);
+					FlxPoint.get(strXPos, strYPos);
 				var strLine = new StrumLine(chars,
 					startingPos,
 					strumLine.strumScale == null ? 1 : strumLine.strumScale,
