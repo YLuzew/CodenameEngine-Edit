@@ -41,7 +41,9 @@ class OptionsMenu extends TreeMenu {
 		{
 			name: 'optionsTree.padCustomize-name',
 			desc: 'optionsTree.padCustomize-desc',
-			substate: mobile.funkin.backend.system.MobileControlSelectSubState
+			substate: (function(name:String, desc:String):MusicBeatSubstate {
+				return new mobile.funkin.backend.system.MobileControlSelectSubState();
+			})
 		},
 		#end
 		#if TRANSLATIONS_SUPPORT
