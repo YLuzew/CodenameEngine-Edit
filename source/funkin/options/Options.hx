@@ -32,7 +32,7 @@ class Options
 	public static var oldPadTexture:Bool = false;
 	/** 触摸板不透明度，0-100 **/
 	public static var touchPadAlpha:Int = FlxG.onMobile ? 60 : 0;
-	/** 手机游玩方式，照搬 dustin 的 MobileData.mode：0=Pad-Right 1=Pad-Left 2=Pad-Custom 3=Hitbox **/
+	/** 手机游玩方式：0=Pad-Right 1=Pad-Left 2=Pad-Custom 3=Hitbox 4=Official（官方手机版布局） **/
 	public static var mobileControlMode:Int = 3;
 	public static var mobileExtraKeyReturns:Array<String> = ['SHIFT', 'SPACE', 'Q', 'E'];
 

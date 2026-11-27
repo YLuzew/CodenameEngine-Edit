@@ -104,7 +104,7 @@
 		<str id="extraButtons-desc">Seleziona quanti pulsanti extra preferisci avere sull'hitbox.</str>
 
 		<str id="mobileControlMode-name">Play Mode</str>
-		<str id="mobileControlMode-desc">Pad-Right / Pad-Left / Pad-Custom / Hitbox.</str>
+		<str id="mobileControlMode-desc">Pad-Right / Pad-Left / Pad-Custom / Hitbox / Official.</str>
 
 		<str id="hitboxAlpha-name">Opacità Hitbox</str>
 		<str id="hitboxAlpha-desc">Modifica l'opacità dell'hitbox</str>

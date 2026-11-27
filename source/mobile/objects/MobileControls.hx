@@ -28,6 +28,8 @@ class MobileControls extends FlxTypedSpriteGroup<MobileInputManager>
 				initControler(2);
 			case 3: // HITBOX
 				initControler(3);
+			case 4: // OFFICIAL
+				initControler(4);
 		}
 	}
 
@@ -47,6 +49,9 @@ class MobileControls extends FlxTypedSpriteGroup<MobileInputManager>
 			case 3:
 				hitbox = new Hitbox();
 				add(hitbox);
+			case 4:
+				touchPad = new TouchPad('OFFICIAL', 'NONE');
+				add(touchPad);
 		}
 	}
 

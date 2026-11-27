@@ -100,7 +100,7 @@
 		<str id="extraButtons-desc">Selecciona cuántos botones extra prefieres tener en el hitbox.</str>
 
 		<str id="mobileControlMode-name">Play Mode</str>
-		<str id="mobileControlMode-desc">Pad-Right / Pad-Left / Pad-Custom / Hitbox.</str>
+		<str id="mobileControlMode-desc">Pad-Right / Pad-Left / Pad-Custom / Hitbox / Official.</str>
 
 		<str id="hitboxAlpha-name">Opacidad del Hitbox</str>
 		<str id="hitboxAlpha-desc">Cambia qué tan opaco debe ser el hitbox</str>

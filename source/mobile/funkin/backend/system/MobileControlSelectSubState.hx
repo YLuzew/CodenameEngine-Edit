@@ -16,7 +16,7 @@ import mobile.objects.MobileControls;
 
 class MobileControlSelectSubState extends MusicBeatSubstate
 {
-	var options:Array<String> = ['Pad-Right', 'Pad-Left', 'Pad-Custom', 'Hitbox'];
+	var options:Array<String> = ['Pad-Right', 'Pad-Left', 'Pad-Custom', 'Hitbox', 'Official'];
 	var control:MobileControls;
 	var leftArrow:FlxSprite;
 	var rightArrow:FlxSprite;
@@ -256,7 +256,7 @@ class MobileControlSelectSubState extends MusicBeatSubstate
 
 		switch (curOption)
 		{
-			case 0 | 1 | 3:
+			case 0 | 1 | 3 | 4:
 				reset.visible = false;
 				changeControls();
 			case 2:

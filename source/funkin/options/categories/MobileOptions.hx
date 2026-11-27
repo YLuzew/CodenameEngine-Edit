@@ -57,8 +57,8 @@ class MobileOptions extends TreeMenuScreen
 			HitboxModes = ["Normal"];
 
 		add(new NumOption(getNameID('extraButtons'), getDescID('extraButtons'), 0, 2, 1, 'extraButtons'));
-		add(new ArrayOption(getNameID('mobileControlMode'), getDescID('mobileControlMode'), [0, 1, 2, 3],
-			['Pad-Right', 'Pad-Left', 'Pad-Custom', 'Hitbox'], 'mobileControlMode', __changePlayMode));
+		add(new ArrayOption(getNameID('mobileControlMode'), getDescID('mobileControlMode'), [0, 1, 2, 3, 4],
+			['Pad-Right', 'Pad-Left', 'Pad-Custom', 'Hitbox', 'Official'], 'mobileControlMode', __changePlayMode));
 		#if TOUCH_CONTROLS
 		add(new NumOption(getNameID('hitboxAlpha'), getDescID('hitboxAlpha'), 0, 100, 5, 'hitboxAlpha'));
 		add(new Checkbox(getNameID('oldPadTexture'), getDescID('oldPadTexture'), 'oldPadTexture', __changePadTexture));
