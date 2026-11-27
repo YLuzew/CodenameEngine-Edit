@@ -29,8 +29,6 @@
 
         <str id="optionsTree.mobile-name">Mobil Ayarlar</str>
         <str id="optionsTree.mobile-desc">Mobil kontrollere ilişkin ayarları değiştirin.</str>
-        <str id="optionsTree.padCustomize-name">Pad Özelleştir</str>
-        <str id="optionsTree.padCustomize-desc">Dokunmatik pad butonlarını sürükleyip çıkışta kaydet.</str>
     </group>
 
     <group name="KeybindOptions" prefix="KeybindsOptions.">
@@ -109,6 +107,8 @@
 
         <str id="mobileControlMode-name">Play Mode</str>
         <str id="mobileControlMode-desc">Pad-Right / Pad-Left / Pad-Custom / Hitbox / Official.</str>
+        <str id="padCustomize-name">Pad Özelleştir</str>
+        <str id="padCustomize-desc">Pad butonlarını sürükle ve kaydet. (Sadece Pad-Custom modunda)</str>
 
         <str id="hitboxAlpha-name">Hitbox Opaklığı</str>
         <str id="hitboxAlpha-desc">Hitbox'ın ne kadar şeffaf olacağını değiştirin.</str>

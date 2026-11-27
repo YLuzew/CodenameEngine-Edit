@@ -29,8 +29,6 @@
 
 		<str id="optionsTree.mobile-name">Opzioni Mobile</str>
 		<str id="optionsTree.mobile-desc">Modifica le opzioni relative ai dispositivi mobili o ai controlli touch.</str>
-		<str id="optionsTree.padCustomize-name">Personalizza Pad</str>
-		<str id="optionsTree.padCustomize-desc">Trascina i pulsanti del pad touch e salva all'uscita.</str>
 	</group>
 
 	<group name="KeybindOptions" prefix="KeybindsOptions.">
@@ -105,6 +103,8 @@
 
 		<str id="mobileControlMode-name">Play Mode</str>
 		<str id="mobileControlMode-desc">Pad-Right / Pad-Left / Pad-Custom / Hitbox / Official.</str>
+		<str id="padCustomize-name">Personalizza Pad</str>
+		<str id="padCustomize-desc">Trascina i pulsanti del pad e salva. (Solo con Pad-Custom)</str>
 
 		<str id="hitboxAlpha-name">Opacità Hitbox</str>
 		<str id="hitboxAlpha-desc">Modifica l'opacità dell'hitbox</str>

@@ -45,6 +45,8 @@ class MobileOptions extends TreeMenuScreen
 	#end
 
 	var HitboxModes:Array<String>;
+	var padCustomOption:TextOption;
+	var playModeOption:ArrayOption;
 	public function new()
 	{
 		super('optionsTree.mobile-name', 'optionsTree.mobile-name', 'MobileOptions.', ['FULL', 'A_B']);
@@ -57,8 +59,13 @@ class MobileOptions extends TreeMenuScreen
 			HitboxModes = ["Normal"];
 
 		add(new NumOption(getNameID('extraButtons'), getDescID('extraButtons'), 0, 2, 1, 'extraButtons'));
-		add(new ArrayOption(getNameID('mobileControlMode'), getDescID('mobileControlMode'), [0, 1, 2, 3, 4],
+		add(playModeOption = new ArrayOption(getNameID('mobileControlMode'), getDescID('mobileControlMode'), [0, 1, 2, 3, 4],
 			['Pad-Right', 'Pad-Left', 'Pad-Custom', 'Hitbox', 'Official'], 'mobileControlMode', __changePlayMode));
+		#if TOUCH_CONTROLS
+		// 只有 Play Mode 选到 Pad-Custom 时才可点，否则灰掉
+		add(padCustomOption = new TextOption(getNameID('padCustomize'), getDescID('padCustomize'), ' >', __openPadCustomize));
+		padCustomOption.locked = (Options.mobileControlMode != 2);
+		#end
 		#if TOUCH_CONTROLS
 		add(new NumOption(getNameID('hitboxAlpha'), getDescID('hitboxAlpha'), 0, 100, 5, 'hitboxAlpha'));
 		add(new Checkbox(getNameID('oldPadTexture'), getDescID('oldPadTexture'), 'oldPadTexture', __changePadTexture));
@@ -96,11 +103,20 @@ class MobileOptions extends TreeMenuScreen
 		#end
 	}
 
+	private function __openPadCustomize() {
+		#if TOUCH_CONTROLS
+		if (Options.mobileControlMode != 2) return;
+		var st = MusicBeatState.instance;
+		if (st != null) st.openSubState(new mobile.funkin.backend.system.MobileControlSelectSubState());
+		#end
+	}
+
 	private function __changePlayMode(value:Dynamic) {
 		#if TOUCH_CONTROLS
 		mobile.funkin.backend.utils.MobileData.mode = cast value;
 		var s = MusicBeatState.instance;
 		if (s != null) s.applyMobileControlMode();
+		if (padCustomOption != null) padCustomOption.locked = (mobile.funkin.backend.utils.MobileData.mode != 2);
 		#end
 	}
 
@@ -113,6 +129,17 @@ class MobileOptions extends TreeMenuScreen
 			if (s.mobileControls != null && s.mobileControls.instance != null)
 				s.mobileControls.instance.visible = true;
 		}
+		#end
+	}
+
+	override function update(elapsed:Float) {
+		super.update(elapsed);
+		#if TOUCH_CONTROLS
+		// Pad Customize 界面里改过模式的话，把状态同步回来
+		final curMode:Int = mobile.funkin.backend.utils.MobileData.mode;
+		if (Options.mobileControlMode != curMode) Options.mobileControlMode = curMode;
+		if (padCustomOption != null) padCustomOption.locked = (curMode != 2);
+		if (playModeOption != null && playModeOption.currentSelection != curMode) playModeOption.currentSelection = curMode;
 		#end
 	}
 

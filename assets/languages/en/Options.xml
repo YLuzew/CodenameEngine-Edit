@@ -29,8 +29,6 @@
 
 		<str id="optionsTree.mobile-name">Mobile Options</str>
 		<str id="optionsTree.mobile-desc">Change Options related to Mobile Controls.</str>
-		<str id="optionsTree.padCustomize-name">Pad Customize</str>
-		<str id="optionsTree.padCustomize-desc">Drag the touch pad buttons to place them wherever you want, then exit and save.</str>
 	</group>
 
 	<group name="KeybindOptions" prefix="KeybindsOptions.">
@@ -133,6 +131,8 @@
 
 		<str id="mobileControlMode-name">Play Mode</str>
 		<str id="mobileControlMode-desc">Pad-Right / Pad-Left / Pad-Custom / Hitbox / Official.</str>
+		<str id="padCustomize-name">Pad Customize</str>
+		<str id="padCustomize-desc">Drag the touch pad buttons, then exit and save. (Only when Play Mode is Pad-Custom)</str>
 
 
 		<str id="hitboxAlpha-name">Hitbox Opacity</str>
