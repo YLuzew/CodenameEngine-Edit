@@ -57,6 +57,11 @@ class MobileOptions extends TreeMenuScreen
 			HitboxModes = ["Normal"];
 
 		add(new NumOption(getNameID('extraButtons'), getDescID('extraButtons'), 0, 2, 1, 'extraButtons'));
+		add(new ArrayOption(getNameID('mobileControlMode'), getDescID('mobileControlMode'), ["HITBOX", "MOBILEPAD"],
+			["Hitbox", "MobilePad"], 'mobileControlMode', __changeMobileControlMode));
+		add(new ArrayOption(getNameID('mobilePadLayout'), getDescID('mobilePadLayout'),
+			["TouchPad_LEFT_FULL", "TouchPad_RIGHT_FULL", "TouchPad_LEFT_RIGHT", "TouchPad_UP_DOWN"],
+			["Pad Left Full", "Pad Right Full", "Left / Right", "Up / Down"], 'mobilePadLayout', __changeMobilePadLayout));
 		/* Tahtalı Köy, can be added back later.
 		add(new ArrayOption(getNameID('hitboxType'), getDescID('hitboxType'), ["No Gradient", "No Gradient (Old)", "Gradient"],
 			["No Gradient", "No Gradient (Old)", "Gradient"], 'hitboxType'));
@@ -84,6 +89,16 @@ class MobileOptions extends TreeMenuScreen
 		add(externalOption = new ArrayOption(getNameID('storageType'), getDescID('storageType'), storageTypes,
 			storageTypes, 'storageType'));
 		#end
+	}
+
+	private function __changeMobileControlMode(value:Dynamic) {
+		var s = MusicBeatState.instance;
+		if (s != null && Std.isOfType(s, PlayState)) s.applyMobileControlMode(Std.string(value));
+	}
+
+	private function __changeMobilePadLayout(value:Dynamic) {
+		var s = MusicBeatState.instance;
+		if (s != null && Std.isOfType(s, PlayState)) s.applyMobileControlMode();
 	}
 
 	override function close()

@@ -1,0 +1,34 @@
+{
+  "buttons": [
+    {
+      "name": "buttonLeft",
+      "id": "LEFT",
+      "texture": "button_bg",
+      "position": [
+        0,
+        587
+      ],
+      "scale": 0.243,
+      "color": "#C24B99",
+      "subgraphic": {
+        "texture": "left",
+        "scale": 1
+      }
+    },
+    {
+      "name": "buttonRight",
+      "id": "RIGHT",
+      "texture": "button_bg",
+      "position": [
+        127,
+        587
+      ],
+      "scale": 0.243,
+      "color": "#F9393F",
+      "subgraphic": {
+        "texture": "right",
+        "scale": 1
+      }
+    }
+  ]
+}

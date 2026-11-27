@@ -1,0 +1,64 @@
+{
+  "buttons": [
+    {
+      "name": "buttonUp",
+      "id": "UP",
+      "texture": "button_bg",
+      "position": [
+        1022,
+        314
+      ],
+      "scale": 0.243,
+      "color": "#12FA05",
+      "subgraphic": {
+        "texture": "up",
+        "scale": 1
+      }
+    },
+    {
+      "name": "buttonLeft",
+      "id": "LEFT",
+      "texture": "button_bg",
+      "position": [
+        896,
+        413
+      ],
+      "scale": 0.243,
+      "color": "#C24B99",
+      "subgraphic": {
+        "texture": "left",
+        "scale": 1
+      }
+    },
+    {
+      "name": "buttonRight",
+      "id": "RIGHT",
+      "texture": "button_bg",
+      "position": [
+        1148,
+        413
+      ],
+      "scale": 0.243,
+      "color": "#F9393F",
+      "subgraphic": {
+        "texture": "right",
+        "scale": 1
+      }
+    },
+    {
+      "name": "buttonDown",
+      "id": "DOWN",
+      "texture": "button_bg",
+      "position": [
+        1022,
+        521
+      ],
+      "scale": 0.243,
+      "color": "#00FFFF",
+      "subgraphic": {
+        "texture": "down",
+        "scale": 1
+      }
+    }
+  ]
+}

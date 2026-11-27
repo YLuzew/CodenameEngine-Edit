@@ -971,7 +971,8 @@
 			gameAndCharsCall("postCreate", null, "gamePostCreate");
 
 			if (mobileManager != null) {
-					addHitboxCamera();
+					if (Options.mobileControlMode != "MOBILEPAD")
+						addHitboxCamera();
 					addButtonCamera();
 			}
 		}
@@ -1107,21 +1108,29 @@
 
 		@:dox(hide) function startSong():Void
 		{
-			var ek:String = " EK " + Options.extraButtons;
-			var eks:String = " EKS " + Options.extraButtons;
-			var extraKeyString = "";
+			if (Options.mobileControlMode == "MOBILEPAD")
+			{
+				addButton(Options.mobilePadLayout);
+				addButtonCamera();
+			}
+			else
+			{
+				var ek:String = " EK " + Options.extraButtons;
+				var eks:String = " EKS " + Options.extraButtons;
+				var extraKeyString = "";
 
-			if (mobile.Config.Hitboxes.exists(Options.hitboxMode + eks) && Options.hitboxPos)
-				extraKeyString = eks;
-			else if (mobile.Config.Hitboxes.exists(Options.hitboxMode + ek))
-				extraKeyString = ek;
-			
-			addHitbox(Options.hitboxMode + extraKeyString);
-			addHitboxCamera();
-			for (hitbox in mobileManager.hitboxes) {
-				hitbox.showAlpha = Options.hitboxAlpha;
-				if (getMobilePadButton("pause") != null)
-					hitbox.deadZones.push(getMobilePadButton("pause"));
+				if (mobile.Config.Hitboxes.exists(Options.hitboxMode + eks) && Options.hitboxPos)
+					extraKeyString = eks;
+				else if (mobile.Config.Hitboxes.exists(Options.hitboxMode + ek))
+					extraKeyString = ek;
+
+				addHitbox(Options.hitboxMode + extraKeyString);
+				addHitboxCamera();
+				for (hitbox in mobileManager.hitboxes) {
+					hitbox.showAlpha = Options.hitboxAlpha;
+					if (getMobilePadButton("pause") != null)
+						hitbox.deadZones.push(getMobilePadButton("pause"));
+				}
 			}
 			gameAndCharsCall("onSongStart");
 			startingSong = false;

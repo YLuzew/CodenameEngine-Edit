@@ -1,0 +1,19 @@
+{
+  "buttons": [
+    {
+      "name": "buttonP",
+      "id": "PAUSE",
+      "texture": "button_bg",
+      "position": [
+        1156,
+        2
+      ],
+      "scale": 0.243,
+      "color": "#E5DE00",
+      "subgraphic": {
+        "texture": "p",
+        "scale": 1
+      }
+    }
+  ]
+}

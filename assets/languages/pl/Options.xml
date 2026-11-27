@@ -95,6 +95,11 @@
 		<str id="extraButtons-name">Dodatkowe Przyciski</str>
 		<str id="extraButtons-desc">Wybierz, ile dodatkowych przycisków chcesz mieć na hitboxie.</str>
 
+		<str id="mobileControlMode-name">Tryb Gry</str>
+		<str id="mobileControlMode-desc">Wybierz między pasami Hitbox a przyciskami dotykowymi MobilePad.</str>
+
+		<str id="mobilePadLayout-name">Układ Pada</str>
+		<str id="mobilePadLayout-desc">Wybierz, którego układu pada dotykowego używa tryb MobilePad.</str>
 		<str id="hitboxAlpha-name">Przezroczystość Hitboxa</str>
 		<str id="hitboxAlpha-desc">Zmień stopień przezroczystości hitboxa</str>
 

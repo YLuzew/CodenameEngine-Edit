@@ -101,6 +101,11 @@
 		<str id="extraButtons-name">Pulsanti Extra</str>
 		<str id="extraButtons-desc">Seleziona quanti pulsanti extra preferisci avere sull'hitbox.</str>
 
+		<str id="mobileControlMode-name">Modalità di Gioco</str>
+		<str id="mobileControlMode-desc">Scegli tra le corsie Hitbox e i pulsanti touch del MobilePad.</str>
+
+		<str id="mobilePadLayout-name">Layout del Pad</str>
+		<str id="mobilePadLayout-desc">Scegli quale layout del pad touch usa la modalità MobilePad.</str>
 		<str id="hitboxAlpha-name">Opacità Hitbox</str>
 		<str id="hitboxAlpha-desc">Modifica l'opacità dell'hitbox</str>
 

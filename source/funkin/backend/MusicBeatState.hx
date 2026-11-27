@@ -73,7 +73,7 @@ class MusicBeatState extends FlxState implements IBeatCancellableReceiver
 		}
 		return false;
 	}
-	/*
+	/* MobilePad (touch pad) */
 	public function addMobilePad(DPad:String, Action:String) {
 		mobileManager.addDPad(DPad);
 		mobileManager.addButton(Action);
@@ -86,7 +86,28 @@ class MusicBeatState extends FlxState implements IBeatCancellableReceiver
 		mobileManager.addDPadCamera();
 		mobileManager.addButtonCamera();
 	}
-	*/
+
+	/**
+	 * Spawns the mobile controls matching `Options.mobileControlMode`:
+	 * either the hitbox lanes (`HITBOX`) or the touch pad (`MOBILEPAD`).
+	 * Already spawned controls are removed first, so this is safe to call at runtime.
+	**/
+	public function applyMobileControlMode(?mode:String = null):Void {
+		if (mode != null) Options.mobileControlMode = mode;
+		if (mobileManager == null) return;
+
+		mobileManager.removeHitbox();
+		mobileManager.removeDPad();
+		mobileManager.removeButton();
+
+		if (Options.mobileControlMode == "MOBILEPAD") {
+			mobileManager.addButton(Options.mobilePadLayout);
+			addButtonCamera();
+		} else {
+			mobileManager.addHitbox(Options.hitboxMode);
+			addHitboxCamera();
+		}
+	}
 	/* DPad */
 	public function addDPad(DPad:String) {
 		mobileManager.addDPad(DPad);

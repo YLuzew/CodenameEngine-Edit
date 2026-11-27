@@ -1,0 +1,64 @@
+{
+  "buttons": [
+    {
+      "name": "buttonA",
+      "id": "ACCEPT",
+      "texture": "button_bg",
+      "position": [
+        1156,
+        596
+      ],
+      "scale": 0.243,
+      "color": "#FF0000",
+      "subgraphic": {
+        "texture": "a",
+        "scale": 1
+      }
+    },
+    {
+      "name": "buttonB",
+      "id": "BACK",
+      "texture": "button_bg",
+      "position": [
+        1032,
+        596
+      ],
+      "scale": 0.243,
+      "color": "#FFCB00",
+      "subgraphic": {
+        "texture": "b",
+        "scale": 1
+      }
+    },
+    {
+      "name": "buttonM",
+      "id": "M",
+      "texture": "button_bg",
+      "position": [
+        908,
+        596
+      ],
+      "scale": 0.243,
+      "color": "#00BBFF",
+      "subgraphic": {
+        "texture": "m",
+        "scale": 1
+      }
+    },
+    {
+      "name": "buttonE",
+      "id": "E",
+      "texture": "button_bg",
+      "position": [
+        784,
+        596
+      ],
+      "scale": 0.243,
+      "color": "#FF7D00",
+      "subgraphic": {
+        "texture": "e",
+        "scale": 1
+      }
+    }
+  ]
+}

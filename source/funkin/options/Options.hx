@@ -27,6 +27,10 @@ class Options
 	public static var hitboxAlpha:Float = 0.7;
 	public static var hitboxType:String = "Gradient";
 	public static var hitboxMode:String = 'Normal';
+	/** Mobile play mode: `HITBOX` (lane buttons) or `MOBILEPAD` (touch pad buttons). **/
+	public static var mobileControlMode:String = "HITBOX";
+	/** Which TouchPad_* layout the `MOBILEPAD` mode spawns. **/
+	public static var mobilePadLayout:String = "TouchPad_LEFT_FULL";
 	public static var mobileExtraKeyReturns:Array<String> = ['SHIFT', 'SPACE', 'Q', 'E'];
 
 	/**

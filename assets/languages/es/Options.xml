@@ -97,6 +97,11 @@
 		<str id="extraButtons-name">Botones Extra</str>
 		<str id="extraButtons-desc">Selecciona cuántos botones extra prefieres tener en el hitbox.</str>
 
+		<str id="mobileControlMode-name">Modo de Juego</str>
+		<str id="mobileControlMode-desc">Elige entre los carriles del Hitbox y los botones táctiles del MobilePad.</str>
+
+		<str id="mobilePadLayout-name">Diseño del Pad</str>
+		<str id="mobilePadLayout-desc">Elige qué diseño de pad táctil usa el modo MobilePad.</str>
 		<str id="hitboxAlpha-name">Opacidad del Hitbox</str>
 		<str id="hitboxAlpha-desc">Cambia qué tan opaco debe ser el hitbox</str>
 
