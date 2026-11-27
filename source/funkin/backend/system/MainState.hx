@@ -170,6 +170,9 @@ class MainState extends FlxState {
 		initiated = true;
 
 		mobile.Config.init();
+		#if TOUCH_CONTROLS
+		mobile.funkin.backend.utils.MobileData.init();
+		#end
 
 		if (@:privateAccess FlxG.game._state == @:privateAccess FlxG.game._requestedState) {
 			var startState:Class<FlxState> = Flags.DISABLE_WARNING_SCREEN ? TitleState : funkin.menus.WarningState;

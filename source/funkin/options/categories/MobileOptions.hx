@@ -57,17 +57,22 @@ class MobileOptions extends TreeMenuScreen
 			HitboxModes = ["Normal"];
 
 		add(new NumOption(getNameID('extraButtons'), getDescID('extraButtons'), 0, 2, 1, 'extraButtons'));
-		add(new ArrayOption(getNameID('mobileControlMode'), getDescID('mobileControlMode'), ["HITBOX", "MOBILEPAD"],
-			["Hitbox", "MobilePad"], 'mobileControlMode', __changeMobileControlMode));
-		add(new ArrayOption(getNameID('mobilePadLayout'), getDescID('mobilePadLayout'),
-			["TouchPad_LEFT_FULL", "TouchPad_RIGHT_FULL", "TouchPad_LEFT_RIGHT", "TouchPad_UP_DOWN"],
-			["Pad Left Full", "Pad Right Full", "Left / Right", "Up / Down"], 'mobilePadLayout', __changeMobilePadLayout));
+		add(new ArrayOption(getNameID('mobileControlMode'), getDescID('mobileControlMode'), [0, 1, 2, 3],
+			['Pad-Right', 'Pad-Left', 'Pad-Custom', 'Hitbox'], 'mobileControlMode', __changePlayMode));
+		#if TOUCH_CONTROLS
+		add(new NumOption(getNameID('hitboxAlpha'), getDescID('hitboxAlpha'), 0, 100, 5, 'hitboxAlpha'));
+		add(new Checkbox(getNameID('oldPadTexture'), getDescID('oldPadTexture'), 'oldPadTexture', __changePadTexture));
+		add(new NumOption(getNameID('touchPadAlpha'), getDescID('touchPadAlpha'), 0, 100, 5, 'touchPadAlpha'));
+		add(new ArrayOption(getNameID('hitboxType'), getDescID('hitboxType'), ['noGradient', 'noGradientOld', 'gradient', 'hidden'],
+			["No Gradient", "No Gradient (Old)", "Gradient", "Hidden"], 'hitboxType'));
+		add(new Checkbox(getNameID('hitboxPos'), getDescID('hitboxPos'), 'hitboxPos'));
+		#end
 		/* Tahtalı Köy, can be added back later.
 		add(new ArrayOption(getNameID('hitboxType'), getDescID('hitboxType'), ["No Gradient", "No Gradient (Old)", "Gradient"],
 			["No Gradient", "No Gradient (Old)", "Gradient"], 'hitboxType'));
 		*/
 		add(new ArrayOption(getNameID('hitboxMode'), getDescID('hitboxMode'), HitboxModes, HitboxModes, 'hitboxMode'));
-		add(new Checkbox(getNameID('hitboxPos'), getDescID('hitboxPos'), "hitboxPos"));
+
 		add(new NumOption(getNameID('controlsAlpha'), getDescID('controlsAlpha'), 0.0, 1.0, 0.1, "controlsAlpha", (alpha:Float) ->
 		{
 			//MusicBeatState.instance.mobileManager.alpha = alpha;
@@ -84,21 +89,31 @@ class MobileOptions extends TreeMenuScreen
 				FlxG.sound.muteKeys = [FlxKey.ZERO, FlxKey.NUMPADZERO];
 			}
 		}));
-		add(new NumOption(getNameID('hitboxAlpha'), getDescID('hitboxAlpha'), 0.0, 1.0, 0.1, 'hitboxAlpha'));
+
 		#if android
 		add(externalOption = new ArrayOption(getNameID('storageType'), getDescID('storageType'), storageTypes,
 			storageTypes, 'storageType'));
 		#end
 	}
 
-	private function __changeMobileControlMode(value:Dynamic) {
+	private function __changePlayMode(value:Dynamic) {
+		#if TOUCH_CONTROLS
+		mobile.funkin.backend.utils.MobileData.mode = cast value;
 		var s = MusicBeatState.instance;
-		if (s != null && Std.isOfType(s, PlayState)) s.applyMobileControlMode(Std.string(value));
+		if (s != null) s.applyMobileControlMode();
+		#end
 	}
 
-	private function __changeMobilePadLayout(value:Dynamic) {
+	private function __changePadTexture() {
+		#if TOUCH_CONTROLS
 		var s = MusicBeatState.instance;
-		if (s != null && Std.isOfType(s, PlayState)) s.applyMobileControlMode();
+		if (s != null) {
+			s.removeMobileControls();
+			s.addMobileControls();
+			if (s.mobileControls != null && s.mobileControls.instance != null)
+				s.mobileControls.instance.visible = true;
+		}
+		#end
 	}
 
 	override function close()

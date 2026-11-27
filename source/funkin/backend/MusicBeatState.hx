@@ -13,6 +13,9 @@ import funkin.backend.system.framerate.Framerate;
 import funkin.backend.system.interfaces.IBeatReceiver;
 import funkin.backend.system.interfaces.IBeatCancellableReceiver;
 import funkin.options.PlayerSettings;
+#if TOUCH_CONTROLS
+import mobile.funkin.backend.utils.MobileData;
+#end
 
 /**
  * Base class for all the states.
@@ -73,41 +76,107 @@ class MusicBeatState extends FlxState implements IBeatCancellableReceiver
 		}
 		return false;
 	}
-	/* MobilePad (touch pad) */
-	public function addMobilePad(DPad:String, Action:String) {
-		mobileManager.addDPad(DPad);
-		mobileManager.addButton(Action);
+	/* TouchPad / MobileControls —— 照搬 dustin-build 的 mobile.objects 体系 */
+	#if TOUCH_CONTROLS
+	public var touchPad:mobile.objects.TouchPad;
+	public var mobileControls:mobile.objects.IMobileControls;
+	public var mobileControlsCam:FlxCamera;
+	public var tpadCam:FlxCamera;
+	#end
+
+	public function addTouchPad(DPad:String, Action:String)
+	{
+		#if TOUCH_CONTROLS
+		touchPad = new mobile.objects.TouchPad(DPad, Action);
+		add(touchPad);
+		#end
 	}
-	public function removeMobilePad() {
-		mobileManager.removeDPad();
-		mobileManager.removeButton();
+
+	public function removeTouchPad():Void
+	{
+		#if TOUCH_CONTROLS
+		if (touchPad != null)
+		{
+			remove(touchPad);
+			touchPad = FlxDestroyUtil.destroy(touchPad);
+		}
+
+		if (tpadCam != null)
+		{
+			FlxG.cameras.remove(tpadCam);
+			tpadCam = FlxDestroyUtil.destroy(tpadCam);
+		}
+		#end
 	}
-	public function addMobilePadCamera(defaultDrawTarget:Bool = false):Void {
-		mobileManager.addDPadCamera();
-		mobileManager.addButtonCamera();
+
+	public function addMobileControls(defaultDrawTarget:Bool = false):Void
+	{
+		#if TOUCH_CONTROLS
+		switch (MobileData.mode)
+		{
+			case 0: // Pad-Right
+				mobileControls = new mobile.objects.TouchPad('RIGHT_FULL', 'NONE');
+			case 1: // Pad-Left
+				mobileControls = new mobile.objects.TouchPad('LEFT_FULL', 'NONE');
+			case 2: // Pad-Custom
+				mobileControls = MobileData.getTouchPadCustom(new mobile.objects.TouchPad('RIGHT_FULL', 'NONE'));
+			case 3: // Hitbox
+				mobileControls = new mobile.objects.Hitbox();
+		}
+
+		mobileControlsCam = new FlxCamera();
+		mobileControlsCam.bgColor.alpha = 0;
+		FlxG.cameras.add(mobileControlsCam, defaultDrawTarget);
+
+		mobileControls.instance.cameras = [mobileControlsCam];
+		mobileControls.instance.visible = false;
+		add(mobileControls.instance);
+		#end
+	}
+
+	public function removeMobileControls()
+	{
+		#if TOUCH_CONTROLS
+		if (mobileControls != null)
+		{
+			remove(mobileControls.instance);
+			mobileControls.instance = FlxDestroyUtil.destroy(mobileControls.instance);
+			mobileControls = null;
+		}
+
+		if (mobileControlsCam != null)
+		{
+			FlxG.cameras.remove(mobileControlsCam);
+			mobileControlsCam = FlxDestroyUtil.destroy(mobileControlsCam);
+		}
+		#end
+	}
+
+	public function addTouchPadCamera(?defaultDrawTarget:Bool = false) {
+		#if TOUCH_CONTROLS
+		if (touchPad != null)
+		{
+			tpadCam = new FlxCamera();
+			tpadCam.bgColor.alpha = 0;
+			FlxG.cameras.add(tpadCam, defaultDrawTarget);
+			touchPad.cameras = [tpadCam];
+		}
+		#end
 	}
 
 	/**
-	 * Spawns the mobile controls matching `Options.mobileControlMode`:
-	 * either the hitbox lanes (`HITBOX`) or the touch pad (`MOBILEPAD`).
-	 * Already spawned controls are removed first, so this is safe to call at runtime.
+	 * 重新按 `MobileData.mode` 生成手机控件（Pad-Right / Pad-Left / Pad-Custom / Hitbox）。
 	**/
-	public function applyMobileControlMode(?mode:String = null):Void {
-		if (mode != null) Options.mobileControlMode = mode;
-		if (mobileManager == null) return;
-
-		mobileManager.removeHitbox();
-		mobileManager.removeDPad();
-		mobileManager.removeButton();
-
-		if (Options.mobileControlMode == "MOBILEPAD") {
-			mobileManager.addButton(Options.mobilePadLayout);
-			addButtonCamera();
-		} else {
-			mobileManager.addHitbox(Options.hitboxMode);
-			addHitboxCamera();
-		}
+	public function applyMobileControlMode(?mode:Int = null):Void {
+		#if TOUCH_CONTROLS
+		if (mode != null) MobileData.mode = mode;
+		removeMobileControls();
+		addMobileControls();
+		if (mobileControls != null && mobileControls.instance != null)
+			mobileControls.instance.visible = true;
+		#end
 	}
+
 	/* DPad */
 	public function addDPad(DPad:String) {
 		mobileManager.addDPad(DPad);

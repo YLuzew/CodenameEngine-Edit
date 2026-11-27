@@ -130,10 +130,8 @@
 		<str id="extraButtons-desc">Select how many extra buttons you prefer to have on hitbox.</str>
 
 		<str id="mobileControlMode-name">Play Mode</str>
-		<str id="mobileControlMode-desc">Choose between the Hitbox lanes and the MobilePad touch buttons.</str>
+		<str id="mobileControlMode-desc">Pad-Right / Pad-Left / Pad-Custom / Hitbox.</str>
 
-		<str id="mobilePadLayout-name">Pad Layout</str>
-		<str id="mobilePadLayout-desc">Choose which touch pad layout the MobilePad mode uses.</str>
 
 		<str id="hitboxAlpha-name">Hitbox Opacity</str>
 		<str id="hitboxAlpha-desc">Change how opaque the Hitbox should be</str>

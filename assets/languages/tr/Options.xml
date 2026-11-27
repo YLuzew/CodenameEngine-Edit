@@ -105,11 +105,9 @@
         <str id="extraButtons-name">Ekstra Butonlar</str>
         <str id="extraButtons-desc">Hitbox üzerinde kaç adet ekstra buton olacağını seçin.</str>
 
-        <str id="mobileControlMode-name">Oyun Modu</str>
-        <str id="mobileControlMode-desc">Hitbox şeritleri ile MobilePad dokunmatik butonları arasında seçim yap.</str>
+        <str id="mobileControlMode-name">Play Mode</str>
+        <str id="mobileControlMode-desc">Pad-Right / Pad-Left / Pad-Custom / Hitbox.</str>
 
-        <str id="mobilePadLayout-name">Pad Düzeni</str>
-        <str id="mobilePadLayout-desc">MobilePad modunun hangi dokunmatik pad düzenini kullanacağını seç.</str>
         <str id="hitboxAlpha-name">Hitbox Opaklığı</str>
         <str id="hitboxAlpha-desc">Hitbox'ın ne kadar şeffaf olacağını değiştirin.</str>
 

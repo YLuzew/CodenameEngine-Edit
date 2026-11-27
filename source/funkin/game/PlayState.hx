@@ -41,7 +41,10 @@
 	@:access(flixel.text.FlxText.FlxTextFormatRange)
 	@:access(funkin.game.StrumLine)
 	class PlayState extends MusicBeatState
-	{
+{
+	/** 照搬 dustin：触摸板预览模式下 hitbox 改成下半屏三行布局 **/
+	public static var qqqeb:Bool = false;
+
 		/**
 		* Current PlayState instance.
 		*/
@@ -927,6 +930,11 @@
 
 			startingSong = true;
 
+			#if TOUCH_CONTROLS
+			addMobileControls();
+			mobileControls.instance.visible = false;
+			#end
+
 			super.create();
 
 			for(s in introSprites)
@@ -970,11 +978,12 @@
 
 			gameAndCharsCall("postCreate", null, "gamePostCreate");
 
+			#if !TOUCH_CONTROLS
 			if (mobileManager != null) {
-					if (Options.mobileControlMode != "MOBILEPAD")
-						addHitboxCamera();
+					addHitboxCamera();
 					addButtonCamera();
 			}
+			#end
 		}
 
 		/**
@@ -1043,6 +1052,10 @@
 				if (gameAndCharsEvent("onStartCountdown", new CancellableEvent()).cancelled) return;
 			}
 
+			#if TOUCH_CONTROLS
+			if (mobileControls != null && mobileControls.instance != null) mobileControls.instance.visible = true;
+			#end
+
 			startedCountdown = true;
 			Conductor.songPosition = 0;
 			Conductor.songPosition -= Conductor.crochet * introLength - Conductor.songOffset;
@@ -1108,30 +1121,24 @@
 
 		@:dox(hide) function startSong():Void
 		{
-			if (Options.mobileControlMode == "MOBILEPAD")
-			{
-				addButton(Options.mobilePadLayout);
-				addButtonCamera();
-			}
-			else
-			{
-				var ek:String = " EK " + Options.extraButtons;
-				var eks:String = " EKS " + Options.extraButtons;
-				var extraKeyString = "";
+			#if !TOUCH_CONTROLS
+			var ek:String = " EK " + Options.extraButtons;
+			var eks:String = " EKS " + Options.extraButtons;
+			var extraKeyString = "";
 
-				if (mobile.Config.Hitboxes.exists(Options.hitboxMode + eks) && Options.hitboxPos)
-					extraKeyString = eks;
-				else if (mobile.Config.Hitboxes.exists(Options.hitboxMode + ek))
-					extraKeyString = ek;
+			if (mobile.Config.Hitboxes.exists(Options.hitboxMode + eks) && Options.hitboxPos)
+				extraKeyString = eks;
+			else if (mobile.Config.Hitboxes.exists(Options.hitboxMode + ek))
+				extraKeyString = ek;
 
-				addHitbox(Options.hitboxMode + extraKeyString);
-				addHitboxCamera();
-				for (hitbox in mobileManager.hitboxes) {
-					hitbox.showAlpha = Options.hitboxAlpha;
-					if (getMobilePadButton("pause") != null)
-						hitbox.deadZones.push(getMobilePadButton("pause"));
-				}
+			addHitbox(Options.hitboxMode + extraKeyString);
+			addHitboxCamera();
+			for (hitbox in mobileManager.hitboxes) {
+				hitbox.showAlpha = Options.hitboxAlpha;
+				if (getMobilePadButton("pause") != null)
+					hitbox.deadZones.push(getMobilePadButton("pause"));
 			}
+			#end
 			gameAndCharsCall("onSongStart");
 			startingSong = false;
 
@@ -1833,6 +1840,9 @@
 		public function endSong():Void
 		{
 			if (gameAndCharsEvent("onSongEnd", new CancellableEvent()).cancelled) return;
+			#if TOUCH_CONTROLS
+			if (mobileControls != null && mobileControls.instance != null) mobileControls.instance.visible = false;
+			#end
 			for (hitbox in mobileManager.hitboxes) {
 				hitbox.visible = false;
 			}

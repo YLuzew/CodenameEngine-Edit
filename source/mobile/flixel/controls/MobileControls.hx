@@ -200,7 +200,41 @@ class MobileControls extends FlxSpriteGroup {
 		resetAllInputs();
 	}
 
+	/**
+	 * dustin-build 的 mobile.objects 体系（TouchPad / Hitbox）与这里的 mobile-controls 是两套输入。
+	 * Controls.checkMobile() 走的是本类，所以在这里把 touch pad 的按键状态桥接过来，
+	 * Controls.hx 一行都不用改。
+	**/
+	#if TOUCH_CONTROLS
+	public static function checkTouchControls(id:String, state:String):Bool {
+		if (id == null) return false;
+		var mgr:mobile.funkin.backend.system.input.MobileInputManager = null;
+		var st = funkin.backend.MusicBeatState.instance;
+		if (st != null && st.mobileControls != null)
+			mgr = st.mobileControls.instance;
+		if (mgr == null)
+			mgr = mobile.funkin.backend.system.input.MobileInputManager.instance;
+		if (mgr == null) return false;
+
+		var mid = mobile.funkin.backend.system.input.MobileInputID.fromString(id);
+		if (mid == mobile.funkin.backend.system.input.MobileInputID.NONE) return false;
+
+		return switch (state.toLowerCase()) {
+			case "pressed": mgr.buttonPressed(mid);
+			case "justpressed": mgr.buttonJustPressed(mid);
+			case "justreleased": mgr.buttonJustReleased(mid);
+			case "released": mgr.buttonReleased(mid);
+			default: false;
+		}
+	}
+	#end
+
 	public function checkState(id:String, state:String = "pressed"):Bool {
+		#if TOUCH_CONTROLS
+		if (checkTouchControls(id, state))
+			return true;
+		#end
+
 		var isAny = (id == "any" || id == null);
 		for (c in controls) {
 			if (c == null || c.disabled)

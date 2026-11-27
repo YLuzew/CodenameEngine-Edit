@@ -24,13 +24,16 @@ class Options
 	public static var hitboxPos:Bool = false;
 	public static var storageType:String = "EXTERNAL_DATA";
 	public static var controlsAlpha:Float = FlxG.onMobile ? 0.6 : 0;
-	public static var hitboxAlpha:Float = 0.7;
+	/** Hitbox 不透明度，0-100（照搬 dustin-build 的百分比） **/
+	public static var hitboxAlpha:Int = FlxG.onMobile ? 60 : 0;
 	public static var hitboxType:String = "Gradient";
 	public static var hitboxMode:String = 'Normal';
-	/** Mobile play mode: `HITBOX` (lane buttons) or `MOBILEPAD` (touch pad buttons). **/
-	public static var mobileControlMode:String = "HITBOX";
-	/** Which TouchPad_* layout the `MOBILEPAD` mode spawns. **/
-	public static var mobilePadLayout:String = "TouchPad_LEFT_FULL";
+	/** 用旧版 virtualpad 皮肤，false 时用 touchpad 那套纹理 **/
+	public static var oldPadTexture:Bool = false;
+	/** 触摸板不透明度，0-100 **/
+	public static var touchPadAlpha:Int = FlxG.onMobile ? 60 : 0;
+	/** 手机游玩方式，照搬 dustin 的 MobileData.mode：0=Pad-Right 1=Pad-Left 2=Pad-Custom 3=Hitbox **/
+	public static var mobileControlMode:Int = 3;
 	public static var mobileExtraKeyReturns:Array<String> = ['SHIFT', 'SPACE', 'Q', 'E'];
 
 	/**
