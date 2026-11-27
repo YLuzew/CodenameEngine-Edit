@@ -201,11 +201,14 @@ class TouchPad extends MobileInputManager implements IMobileControls
 			}
 
 			button.label = new FlxSprite();
-			// ARROW_* 是「官方手机版」那套：判定线箭头直接当触摸键，没有圆底
-			final isArrow:Bool = Graphic.toUpperCase().startsWith("ARROW_");
+			// arrow* 是「官方手机版」那套：直接用判定线图集 game/notes/default 里的箭头帧当触摸键
+			final isArrow:Bool = Graphic.toUpperCase().startsWith("ARROW");
 			if (isArrow)
 			{
-				button.loadGraphic(buttonLabelGraphicPath);
+				final dir:String = Graphic.substr(5).toUpperCase();
+				button.frames = Paths.getFrames('game/notes/default');
+				button.animation.addByPrefix('idle', 'arrow' + dir, 24, false);
+				button.animation.play('idle');
 				button.scale.set(0.95, 0.95);
 				button.label.visible = false;
 			}
