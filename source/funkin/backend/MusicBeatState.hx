@@ -139,9 +139,14 @@ class MusicBeatState extends FlxState implements IBeatCancellableReceiver
 		#if TOUCH_CONTROLS
 		if (mobileControls != null)
 		{
-			remove(mobileControls.instance);
-			mobileControls.instance = FlxDestroyUtil.destroy(mobileControls.instance);
+			var dead = mobileControls.instance;
+			remove(dead);
+			mobileControls.instance = FlxDestroyUtil.destroy(dead);
 			mobileControls = null;
+
+			// 别让静态单例挂着一具尸体
+			if (mobile.funkin.backend.system.input.MobileInputManager.instance == dead)
+				mobile.funkin.backend.system.input.MobileInputManager.instance = null;
 		}
 
 		if (mobileControlsCam != null)

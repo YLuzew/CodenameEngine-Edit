@@ -52,6 +52,11 @@ class MobileControls extends FlxTypedSpriteGroup<MobileInputManager>
 
 	override public function destroy():Void
 	{
+		// 静态单例指向自己时先摘掉，免得之后有人拿到已销毁的控件去查按键
+		if (mobile.funkin.backend.system.input.MobileInputManager.instance == touchPad
+			|| mobile.funkin.backend.system.input.MobileInputManager.instance == hitbox)
+			mobile.funkin.backend.system.input.MobileInputManager.instance = null;
+
 		super.destroy();
 
 		if (touchPad != null)

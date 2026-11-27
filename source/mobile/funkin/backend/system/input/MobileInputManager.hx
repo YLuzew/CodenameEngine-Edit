@@ -8,6 +8,7 @@ import haxe.ds.Map;
  * A TouchButton group with functions for input handling
  * @author Karim Akra
  */
+@:access(mobile.objects.TouchButton)
 class MobileInputManager extends FlxTypedSpriteGroup<TouchButton>
 {
 	/**
@@ -163,12 +164,16 @@ class MobileInputManager extends FlxTypedSpriteGroup<TouchButton>
 
 	function checkStatusUnsafe(button:MobileInputID, state:ButtonsStates = JUST_PRESSED):Bool
 	{
+		// 按钮可能已经被 destroy（input 置空），或已从 group 里移除，这里必须挡住
+		var btn = trackedButtons.get(button);
+		if (btn == null || btn.input == null) return false;
+
 		return switch (state)
 		{
-			case RELEASED: trackedButtons.get(button).released;
-			case JUST_RELEASED: trackedButtons.get(button).justReleased;
-			case PRESSED: trackedButtons.get(button).pressed;
-			case JUST_PRESSED: trackedButtons.get(button).justPressed;
+			case RELEASED: btn.released;
+			case JUST_RELEASED: btn.justReleased;
+			case PRESSED: btn.pressed;
+			case JUST_PRESSED: btn.justPressed;
 		}
 	}
 

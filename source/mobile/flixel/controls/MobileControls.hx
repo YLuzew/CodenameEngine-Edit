@@ -208,13 +208,14 @@ class MobileControls extends FlxSpriteGroup {
 	#if TOUCH_CONTROLS
 	public static function checkTouchControls(id:String, state:String):Bool {
 		if (id == null) return false;
-		var mgr:mobile.funkin.backend.system.input.MobileInputManager = null;
+
+		// 只认当前 state 持有的控件。不要回退到 MobileInputManager.instance —— 那个静态
+		// 单例在界面销毁后仍指向已 destroy 的控件，查询会直接空引用。
 		var st = funkin.backend.MusicBeatState.instance;
-		if (st != null && st.mobileControls != null)
-			mgr = st.mobileControls.instance;
-		if (mgr == null)
-			mgr = mobile.funkin.backend.system.input.MobileInputManager.instance;
-		if (mgr == null) return false;
+		if (st == null || st.mobileControls == null) return false;
+
+		var mgr = st.mobileControls.instance;
+		if (mgr == null || mgr.members == null || mgr.members.length == 0) return false;
 
 		var mid = mobile.funkin.backend.system.input.MobileInputID.fromString(id);
 		if (mid == mobile.funkin.backend.system.input.MobileInputID.NONE) return false;
