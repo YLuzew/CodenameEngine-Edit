@@ -101,7 +101,8 @@ class TouchPad extends MobileInputManager implements IMobileControls
 		if (funkin.game.PlayState.qqqeb)
 			if (MobileData.mode != 3) add(buttonExtra = createButton((DPad == 'LEFT_FULL') ? 1149 : 0, FlxG.height - 137, 's', 0xFF0066FF));
 		
-		alpha = (Options.touchPadAlpha / 100);
+		// 官方 Arrows 方案：触摸区本身是空的（alpha 0），视觉由判定线箭头提供
+		alpha = (DPad == "ARROWS") ? 0 : (Options.touchPadAlpha / 100);
 		scrollFactor.set();
 		updateTrackedButtons();
 

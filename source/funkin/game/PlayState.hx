@@ -699,6 +699,10 @@
 			camHUD.bgColor.alpha = 0;
 
 			downscroll = Options.downscroll;
+			#if TOUCH_CONTROLS
+			// 官方手机版布局把键位固定在下方，downscroll 无意义，强制关掉
+			if (mobile.funkin.backend.utils.MobileData.mode == 4) downscroll = false;
+			#end
 
 			persistentUpdate = true;
 			persistentDraw = true;
@@ -976,6 +980,10 @@
 
 			__updateNote_event = EventManager.get(NoteUpdateEvent);
 
+			#if TOUCH_CONTROLS
+			applyOfficialMobileLayout();
+			#end
+
 			gameAndCharsCall("postCreate", null, "gamePostCreate");
 
 			#if !TOUCH_CONTROLS
@@ -991,6 +999,32 @@
 		*
 		* This function is dynamic, which means you can do `updateDiscordPresence = function() {}` in scripts.
 		*/
+		#if TOUCH_CONTROLS
+		/**
+		 * 官方手机版（Mode 4 / Official）的键位排布：
+		 * 玩家四条键位贴到屏幕下方居中，对手键位挪到左上角，触摸区在下方覆盖（本身透明）。
+		 * downscroll 在这个布局下没有意义，一并关掉。
+		**/
+		public function applyOfficialMobileLayout():Void {
+			if (mobile.funkin.backend.utils.MobileData.mode != 4) return;
+
+			downscroll = false;
+
+			final laneWidth:Float = Note.swagWidth * 4;
+			for (sl in strumLines.members) {
+				if (sl == null) continue;
+				final isPlayer:Bool = (sl.data != null && sl.data.type == 1);
+				if (isPlayer) {
+					sl.y = FlxG.height - 160;
+					sl.x = Std.int((FlxG.width - laneWidth) / 2);
+				} else {
+					sl.y = 0;
+					sl.x = 0;
+				}
+			}
+		}
+		#end
+
 		public dynamic function updateDiscordPresence()
 			DiscordUtil.call("onPlayStateUpdate", []);
 
