@@ -41,4 +41,6 @@ import android.os.Build.VERSION as AndroidVersion;
 import android.os.Build.VERSION_CODES as AndroidVersionCode;
 #end
 
+using StringTools;
+
 #end
