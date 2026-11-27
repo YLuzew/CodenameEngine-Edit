@@ -2,7 +2,10 @@
   "buttons": [
     {
       "name": "buttonA",
-      "id": "ACCEPT",
+      "id": [
+        "ACCEPT",
+        "A"
+      ],
       "texture": "button_bg",
       "position": [
         1156,
@@ -17,7 +20,10 @@
     },
     {
       "name": "buttonB",
-      "id": "BACK",
+      "id": [
+        "BACK",
+        "B"
+      ],
       "texture": "button_bg",
       "position": [
         1032,
@@ -32,7 +38,9 @@
     },
     {
       "name": "buttonC",
-      "id": "C",
+      "id": [
+        "C"
+      ],
       "texture": "button_bg",
       "position": [
         908,
@@ -47,7 +55,9 @@
     },
     {
       "name": "buttonX",
-      "id": "X",
+      "id": [
+        "X"
+      ],
       "texture": "button_bg",
       "position": [
         908,
@@ -62,7 +72,9 @@
     },
     {
       "name": "buttonY",
-      "id": "Y",
+      "id": [
+        "Y"
+      ],
       "texture": "button_bg",
       "position": [
         1032,
@@ -77,7 +89,9 @@
     },
     {
       "name": "buttonZ",
-      "id": "Z",
+      "id": [
+        "Z"
+      ],
       "texture": "button_bg",
       "position": [
         1156,

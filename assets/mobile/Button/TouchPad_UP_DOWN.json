@@ -2,7 +2,10 @@
   "buttons": [
     {
       "name": "buttonUp",
-      "id": "UP",
+      "id": [
+        "UP",
+        "NOTE_UP"
+      ],
       "texture": "button_bg",
       "position": [
         0,
@@ -17,7 +20,10 @@
     },
     {
       "name": "buttonDown",
-      "id": "DOWN",
+      "id": [
+        "DOWN",
+        "NOTE_DOWN"
+      ],
       "texture": "button_bg",
       "position": [
         0,

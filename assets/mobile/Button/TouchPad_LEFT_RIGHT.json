@@ -2,7 +2,10 @@
   "buttons": [
     {
       "name": "buttonLeft",
-      "id": "LEFT",
+      "id": [
+        "LEFT",
+        "NOTE_LEFT"
+      ],
       "texture": "button_bg",
       "position": [
         0,
@@ -17,7 +20,10 @@
     },
     {
       "name": "buttonRight",
-      "id": "RIGHT",
+      "id": [
+        "RIGHT",
+        "NOTE_RIGHT"
+      ],
       "texture": "button_bg",
       "position": [
         127,

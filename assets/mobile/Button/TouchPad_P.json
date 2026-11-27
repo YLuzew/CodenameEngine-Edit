@@ -2,7 +2,10 @@
   "buttons": [
     {
       "name": "buttonP",
-      "id": "PAUSE",
+      "id": [
+        "PAUSE",
+        "P"
+      ],
       "texture": "button_bg",
       "position": [
         1156,

@@ -2,7 +2,10 @@
   "buttons": [
     {
       "name": "buttonUp",
-      "id": "UP",
+      "id": [
+        "UP",
+        "NOTE_UP"
+      ],
       "texture": "button_bg",
       "position": [
         98,
@@ -17,7 +20,10 @@
     },
     {
       "name": "buttonLeft",
-      "id": "LEFT",
+      "id": [
+        "LEFT",
+        "NOTE_LEFT"
+      ],
       "texture": "button_bg",
       "position": [
         0,
@@ -32,7 +38,10 @@
     },
     {
       "name": "buttonRight",
-      "id": "RIGHT",
+      "id": [
+        "RIGHT",
+        "NOTE_RIGHT"
+      ],
       "texture": "button_bg",
       "position": [
         196,
@@ -47,7 +56,10 @@
     },
     {
       "name": "buttonDown",
-      "id": "DOWN",
+      "id": [
+        "DOWN",
+        "NOTE_DOWN"
+      ],
       "texture": "button_bg",
       "position": [
         98,
@@ -62,7 +74,10 @@
     },
     {
       "name": "buttonPause",
-      "id": "PAUSE",
+      "id": [
+        "PAUSE",
+        "P"
+      ],
       "texture": "button_bg",
       "position": [
         1156,
