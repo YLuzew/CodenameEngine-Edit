@@ -79,6 +79,20 @@ class MobileData
         return touchPad;
     }
 	
+	/**
+	 * 清掉 Pad-Custom 保存的位置，下次构建触摸板时回到 DPadModes 里的默认布局。
+	**/
+	public static function clearTouchPadCustom():Void
+	{
+		if (save == null) return;
+		if (save.data != null)
+		{
+			save.data.buttons = null;
+			save.data.extraData = null;
+		}
+		save.flush();
+	}
+
 	public static function clearTouchPadData()
 	{
 		dpadModes.clear();

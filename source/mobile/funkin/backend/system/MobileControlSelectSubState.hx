@@ -136,7 +136,9 @@ class MobileControlSelectSubState extends MusicBeatSubstate
 
 		reset = new UIButton(exit.x, exit.height + exit.y + 20, "Reset", () ->
 		{
-			changeOption(0); // realods the current control mode ig?
+			// 清掉已保存的位置，再按 DPadModes 重新构建，才会回到最初的布局
+			MobileData.clearTouchPadCustom();
+			changeControls();
 			FlxG.sound.play(Paths.sound('menu/cancel'));
 		});
 		reset.color = FlxColor.RED;
