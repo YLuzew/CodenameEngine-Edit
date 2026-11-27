@@ -122,8 +122,8 @@ class MusicBeatState extends FlxState implements IBeatCancellableReceiver
 				mobileControls = MobileData.getTouchPadCustom(new mobile.objects.TouchPad('RIGHT_FULL', 'NONE'));
 			case 3: // Hitbox
 				mobileControls = new mobile.objects.Hitbox();
-			case 4: // Official（FunkinCrew 手机版 DoubleThumbDPad 布局）
-				mobileControls = new mobile.objects.TouchPad('OFFICIAL', 'NONE');
+			case 4: // Official（FunkinCrew 手机版 Arrows 布局：判定线箭头当触摸键）
+				mobileControls = new mobile.objects.TouchPad('ARROWS', 'NONE');
 		}
 
 		mobileControlsCam = new FlxCamera();

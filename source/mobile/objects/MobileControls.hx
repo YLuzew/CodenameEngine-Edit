@@ -50,7 +50,7 @@ class MobileControls extends FlxTypedSpriteGroup<MobileInputManager>
 				hitbox = new Hitbox();
 				add(hitbox);
 			case 4:
-				touchPad = new TouchPad('OFFICIAL', 'NONE');
+				touchPad = new TouchPad('ARROWS', 'NONE');
 				add(touchPad);
 		}
 	}

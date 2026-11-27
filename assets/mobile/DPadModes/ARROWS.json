@@ -1,0 +1,32 @@
+{
+  "buttons": [
+    {
+      "button": "buttonLeft",
+      "graphic": "ARROW_LEFT",
+      "x": 188,
+      "y": 398,
+      "color": "0xFFC34B9A"
+    },
+    {
+      "button": "buttonDown",
+      "graphic": "ARROW_DOWN",
+      "x": 414,
+      "y": 398,
+      "color": "0xFF00FFFF"
+    },
+    {
+      "button": "buttonUp",
+      "graphic": "ARROW_UP",
+      "x": 640,
+      "y": 398,
+      "color": "0xFF12FB06"
+    },
+    {
+      "button": "buttonRight",
+      "graphic": "ARROW_RIGHT",
+      "x": 866,
+      "y": 398,
+      "color": "0xFFF9393F"
+    }
+  ]
+}

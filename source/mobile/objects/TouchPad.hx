@@ -201,9 +201,20 @@ class TouchPad extends MobileInputManager implements IMobileControls
 			}
 
 			button.label = new FlxSprite();
-			button.loadGraphic(buttonGraphicPath);
-			button.label.loadGraphic(buttonLabelGraphicPath);
-			button.scale.set(0.243, 0.243);
+			// ARROW_* 是「官方手机版」那套：判定线箭头直接当触摸键，没有圆底
+			final isArrow:Bool = Graphic.toUpperCase().startsWith("ARROW_");
+			if (isArrow)
+			{
+				button.loadGraphic(buttonLabelGraphicPath);
+				button.scale.set(0.95, 0.95);
+				button.label.visible = false;
+			}
+			else
+			{
+				button.loadGraphic(buttonGraphicPath);
+				button.label.loadGraphic(buttonLabelGraphicPath);
+				button.scale.set(0.243, 0.243);
+			}
 			button.label.antialiasing = button.antialiasing = Options.antialiasing;
 			button.color = Color;
 		}
