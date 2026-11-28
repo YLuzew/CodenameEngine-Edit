@@ -840,15 +840,26 @@
 				// 照搬 FunkinCrew/Funkin PlayState.initNoteHitbox()，必须在 StrumLine 构造前算好。
 				if (mobile.funkin.backend.utils.MobileData.mode == 4) {
 					final amplification:Float = (FlxG.width / FlxG.height) / (FlxG.initialWidth / FlxG.initialHeight);
+					// Edit 的 HudCamera 在 downscroll 时会把 y 翻转（pos.y = height - y - spr.height），
+					// 所以要先从「视觉位置」反推成 strum 的 y，再反推出 startingPos.y。
+					final flip:Bool = (camHUD != null && camHUD.downscroll);
+					final swag:Float = Note.swagWidth;
+
 					if (strumLine.type == 1) {
 						strScale = ((FlxG.height / FlxG.width) * 1.95) * amplification;
 						strSpacing = ((FlxG.height / FlxG.width) * 2.8) * amplification;
 						strOffset = 0.5;
-						strYPos = (FlxG.height - Note.swagWidth * strScale) * 0.95;
+						final visH:Float = swag * strScale;
+						final visTop:Float = (FlxG.height - visH) * 0.95;
+						strYPos = flip ? (FlxG.height - visTop - swag * 0.5 * (1 + strScale))
+							: (visTop - swag * 0.5 * (1 - strScale));
 					} else {
 						strScale = 0.4 * amplification;
 						strOffset = 0.06;
-						strYPos = 15;
+						final visH:Float = swag * strScale;
+						final visTop:Float = 15;
+						strYPos = flip ? (FlxG.height - visTop - swag * 0.5 * (1 + strScale))
+							: (visTop - swag * 0.5 * (1 - strScale));
 					}
 					// 写回谱面数据，StrumLine 内部创建 strum 时读的是这两个字段
 					strumLine.strumScale = strScale;
