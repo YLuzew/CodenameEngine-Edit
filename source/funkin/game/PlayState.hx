@@ -1090,11 +1090,13 @@
 			final hudFlip:Bool = (camHUD != null && camHUD.downscroll);
 			final logicTop:Float = hudFlip ? (FlxG.height - visTop - stH) : visTop;
 
-			// 先按相对间隔排开
+			// 先按相对间隔排开：间距写死成 箭头宽 * 1.575（官方 146+80 = 226 的比例），
+			// 不再依赖传进来的 spacing（那条链路实测没生效，四键会贴死）
+			final gap:Float = stW * 1.575;
 			for (i in 0...n) {
 				final st = sl.members[i];
 				if (st == null) continue;
-				st.x = i * stW * spacing;
+				st.x = i * gap;
 				st.y = logicTop;
 			}
 
