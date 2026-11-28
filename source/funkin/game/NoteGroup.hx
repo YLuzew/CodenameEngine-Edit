@@ -8,6 +8,8 @@ import funkin.backend.system.Conductor;
  * To only get the visible notes you gotta do `group.forEach()` or `group.forEachAlive()` instead of `group.members`.
 **/
 class NoteGroup extends FlxTypedGroup<Note> {
+	/** 为 true 时整组不绘制（FlxTypedGroup 的 visible 不会下传到成员，只能自己挡）。 **/
+	public var hidden:Bool = false;
 	var __loopSprite:Note;
 	var i:Int = 0;
 	var __currentlyLooping:Bool = false;
@@ -63,6 +65,8 @@ class NoteGroup extends FlxTypedGroup<Note> {
 	}
 
 	public override function draw() @:privateAccess {
+		if (hidden) return;
+
 		var oldDefaultCameras = FlxCamera._defaultCameras;
 		if (_cameras != null) FlxCamera._defaultCameras = _cameras;
 

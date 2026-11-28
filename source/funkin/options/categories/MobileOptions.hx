@@ -114,8 +114,9 @@ class MobileOptions extends TreeMenuScreen
 	private function __changePlayMode(value:Dynamic) {
 		#if TOUCH_CONTROLS
 		mobile.funkin.backend.utils.MobileData.mode = cast value;
+		// 只在 PlayState 里重建控件；在菜单里重建会把触摸板盖到设置界面上
 		var s = MusicBeatState.instance;
-		if (s != null) s.applyMobileControlMode();
+		if (s != null && Std.isOfType(s, PlayState)) s.applyMobileControlMode();
 		if (padCustomOption != null) padCustomOption.locked = (mobile.funkin.backend.utils.MobileData.mode != 2);
 		#end
 	}
@@ -123,7 +124,7 @@ class MobileOptions extends TreeMenuScreen
 	private function __changePadTexture() {
 		#if TOUCH_CONTROLS
 		var s = MusicBeatState.instance;
-		if (s != null) {
+		if (s != null && Std.isOfType(s, PlayState)) {
 			s.removeMobileControls();
 			s.addMobileControls();
 			if (s.mobileControls != null && s.mobileControls.instance != null)

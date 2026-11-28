@@ -896,7 +896,7 @@
 				#if TOUCH_CONTROLS
 				// 官方 enterMiniMode()：对手键位只保留四个静态箭头，其余（音符）一律不可见
 				if (mobile.funkin.backend.utils.MobileData.mode == 4 && strumLine.type != 1)
-					strLine.notes.visible = false;
+					strLine.notes.hidden = true;
 				#end
 			}
 
@@ -1078,6 +1078,10 @@
 				// mobileControlsCam（普通相机，不翻转），所以这里要用视觉坐标。
 				final hudFlip:Bool = (camHUD != null && camHUD.downscroll);
 				b.y = hudFlip ? (FlxG.height - strum.y - strum.height) : strum.y;
+				// 视觉完全交给判定线的 strum，按钮只当热区
+				b.alpha = 0;
+				b.statusAlphas = [0, 0, 0];
+				b.label.visible = false;
 				b.bounds.makeGraphic(Std.int(b.width - 50), Std.int(b.height - 50), FlxColor.TRANSPARENT);
 				b.centerBounds();
 			}
