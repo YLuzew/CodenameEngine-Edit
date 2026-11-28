@@ -153,6 +153,10 @@
 
         <str id="volumeSFX-name">Efekt Ses Seviyesi</str>
         <str id="volumeSFX-desc">Genel ses yerine sadece ses efektlerinin (SFX) sesini değiştirir.</str>
+        <str id="hitsound-name">Vuruş Sesi</str>
+        <str id="hitsound-desc">Notaya vurduğunda ses çal.</str>
+        <str id="hitsoundVolume-name">Vuruş Sesi Düzeyi</str>
+        <str id="hitsoundVolume-desc">Vuruş sesinin seviyesi.</str>
 
         <str id="songOffset-name">Şarkı Senkron Kayması (Offset)</str>
         <str id="songOffset-desc">Şarkıların başlama gecikmesini ayarlar.</str>

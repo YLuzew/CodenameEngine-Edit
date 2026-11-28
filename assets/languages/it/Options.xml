@@ -148,6 +148,10 @@
 
 		<str id="volumeSFX-name">Volume SFX</str>
 		<str id="volumeSFX-desc">Cambia solo il volume degli SFX (ovvero gli effetti sonori) invece che tutto.</str>
+		<str id="hitsound-name">Suono dei Colpi</str>
+		<str id="hitsound-desc">Riproduce un suono quando colpisci una nota.</str>
+		<str id="hitsoundVolume-name">Volume Suono</str>
+		<str id="hitsoundVolume-desc">Volume del suono dei colpi.</str>
 
 		<str id="songOffset-name">Offset Canzone</str>
 		<str id="songOffset-desc">Cambia l'offset con cui la canzone dovrebbe iniziare.</str>

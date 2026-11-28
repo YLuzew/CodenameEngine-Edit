@@ -44,6 +44,10 @@ class Options
 	public static var ghostTapping:Bool = true;
 	public static var flashingMenu:Bool = true;
 	public static var camZoomOnBeat:Bool = true;
+	/** 命中音效（Psych 的 Hitsound）：`None` 关闭，`hitsound` 用 assets/sounds/hitsound **/
+	public static var hitsound:String = "None";
+	/** 命中音效音量 0-1，0 = 静音 **/
+	public static var hitsoundVolume:Float = 1;
 	public static var fpsCounter:Bool = true;
 	public static var fpsCounterConductor:Bool = true;
 	public static var fpsCounterFlixel:Bool = true;

@@ -141,6 +141,10 @@
 
 		<str id="volumeSFX-name">Głośność SFX</str>
 		<str id="volumeSFX-desc">Zmienia wyłącznie głośność efektów dzwiękowych.</str>
+		<str id="hitsound-name">Dźwięk Trafienia</str>
+		<str id="hitsound-desc">Odtwarzaj dźwięk przy trafieniu nuty.</str>
+		<str id="hitsoundVolume-name">Głośność Dźwięku</str>
+		<str id="hitsoundVolume-desc">Głośność dźwięku trafienia.</str>
 
 		<str id="songOffset-name">Opóźnienie Ścieżki</str>
 		<str id="songOffset-desc">Wyrównuje opóźnienie w jakim ścieżki się zaczną.</str>

@@ -154,6 +154,10 @@
 
 		<str id="volumeSFX-name">Volume dos SFX</str>
 		<str id="volumeSFX-desc">Muda apenas o volume dos efeitos sonoros em vez de tudo.</str>
+		<str id="hitsound-name">Som de Acerto</str>
+		<str id="hitsound-desc">Toca um som ao acertar uma nota.</str>
+		<str id="hitsoundVolume-name">Volume do Som</str>
+		<str id="hitsoundVolume-desc">Volume do som de acerto.</str>
 
 		<str id="songOffset-name">Atraso da Música</str>
 		<str id="songOffset-desc">Muda a posição da música relativamente às notas.</str>

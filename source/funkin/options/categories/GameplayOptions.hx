@@ -18,6 +18,10 @@ class GameplayOptions extends TreeMenuScreen {
 		add(offsetSetting = new NumOption(getNameID('songOffset'), getDescID('songOffset'), -999, 999, 1, 'songOffset', __changeOffset));
 		add(new SliderOption(getNameID('volumeMusic'), getDescID('volumeMusic'), 0, 1, 1, 5, 'volumeMusic', -1, __changeVolumeMusic));
 		add(new SliderOption(getNameID('volumeSFX'), getDescID('volumeSFX'), 0, 1, 1, 5, 'volumeSFX'));
+		// 照搬 Psych Engine：命中音效 + 音量
+		add(new ArrayOption(getNameID('hitsound'), getDescID('hitsound'), ["None", "hitsound"],
+			["None", "Hitsound"], 'hitsound'));
+		add(new SliderOption(getNameID('hitsoundVolume'), getDescID('hitsoundVolume'), 0, 1, 1, 10, 'hitsoundVolume'));
 
 		add(new Separator());
 		add(new TextOption('optionsMenu.advanced', 'optionsTree.gameplay.advanced-desc', ' >', () ->

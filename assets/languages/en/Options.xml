@@ -181,6 +181,10 @@
 
 		<str id="volumeSFX-name">SFX Volume</str>
 		<str id="volumeSFX-desc">Changes only the volume of the SFX instead of everything.</str>
+		<str id="hitsound-name">Hit Sound</str>
+		<str id="hitsound-desc">Play a sound when you hit a note (Psych Engine style).</str>
+		<str id="hitsoundVolume-name">Hit Sound Volume</str>
+		<str id="hitsoundVolume-desc">Volume of the hit sound.</str>
 
 		<str id="songOffset-name">Song Offset</str>
 		<str id="songOffset-desc">Changes the offset that songs should start with.</str>

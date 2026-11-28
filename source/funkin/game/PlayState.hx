@@ -2187,6 +2187,10 @@
 
 			note.wasGoodHit = true;
 
+			// 照搬 Psych Engine 的 hitsound：命中时按音量播放
+			if (Options.hitsoundVolume > 0 && Options.hitsound != null && Options.hitsound != "None")
+				FlxG.sound.play(Paths.sound(Options.hitsound), Options.hitsoundVolume);
+
 			var noteDiff = Math.abs(Conductor.songPosition - note.strumTime), rating:Rating;
 			if (!Flags.USE_LEGACY_TIMING) rating = ratingManager.judgeNote(noteDiff);
 			else {
