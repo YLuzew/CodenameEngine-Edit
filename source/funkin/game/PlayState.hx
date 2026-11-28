@@ -852,7 +852,9 @@
 
 					if (strumLine.type == 1) {
 						strScale = ((FlxG.height / FlxG.width) * 1.95) * amplification;
-						strSpacing = ((FlxG.height / FlxG.width) * 2.8) * amplification;
+						// 官方那边 2.8 是相对他们自己的间距基准；Edit 的 createStrum 是拿
+						// swag*scale*spacing 直接当间距，用 1.575 会让四键被撑散，取 1.0 紧贴。
+						strSpacing = 1.0;
 						strOffset = 0.5;
 						final visH:Float = swag * strScale;
 						final visTop:Float = (FlxG.height - visH) * 0.90;
@@ -2187,8 +2189,9 @@
 
 			note.wasGoodHit = true;
 
-			// 照搬 Psych Engine 的 hitsound：命中时按音量播放
-			if (Options.hitsoundVolume > 0 && Options.hitsound != null && Options.hitsound != "None")
+			// 照搬 Psych Engine 的 hitsound：只在玩家命中时播放（对手 auto-hit 不响）
+			if (strumLine != null && !strumLine.cpu
+				&& Options.hitsoundVolume > 0 && Options.hitsound != null && Options.hitsound != "None")
 				FlxG.sound.play(Paths.sound(Options.hitsound), Options.hitsoundVolume);
 
 			var noteDiff = Math.abs(Conductor.songPosition - note.strumTime), rating:Rating;
