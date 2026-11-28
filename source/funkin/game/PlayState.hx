@@ -1069,10 +1069,22 @@
 			final first = sl.members[0];
 			if (first == null) return;
 
-			final stW:Float = first.width;
-			final stH:Float = first.height;
 			final n:Int = sl.members.length;
 			final isPlayerSide:Bool = !sl.opponentSide;
+
+			// 尺寸按屏幕宽度等比：第一版箭头是 146/1280，比现在 DEFAULT_NOTE_SCALE 那套大一圈
+			if (isPlayerSide) {
+				final targetW:Int = Std.int(FlxG.width * 0.114);
+				for (i in 0...n) {
+					final st = sl.members[i];
+					if (st == null) continue;
+					st.setGraphicSize(targetW);
+					st.updateHitbox();
+				}
+			}
+
+			final stW:Float = first.width;
+			final stH:Float = first.height;
 
 			final visTop:Float = isPlayerSide ? ((FlxG.height - stH) * 0.95 - 24 + 10) : (24 * 0.3);
 			final hudFlip:Bool = (camHUD != null && camHUD.downscroll);
