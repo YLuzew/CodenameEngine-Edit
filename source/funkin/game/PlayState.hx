@@ -861,9 +861,6 @@
 						strYPos = flip ? (FlxG.height - visTop - swag * 0.5 * (1 + strScale))
 							: (visTop - swag * 0.5 * (1 - strScale));
 					}
-					// 写回谱面数据，StrumLine 内部创建 strum 时读的是这两个字段
-					strumLine.strumScale = strScale;
-					strumLine.strumSpacing = strSpacing;
 				}
 				#end
 
@@ -881,7 +878,7 @@
 					startingPos = FlxPoint.get(strumLine.strumPos[0] == 0 ? strXPos : strumLine.strumPos[0], strumLine.strumPos[1]);
 				var strLine = new StrumLine(chars,
 					startingPos,
-					strumLine.strumScale == null ? 1 : strumLine.strumScale,
+					strScale,
 					strumLine.type == 2 || (!coopMode && !((strumLine.type == 1 && !opponentMode) || (strumLine.type == 0 && opponentMode))),
 					strumLine.type != 1, coopMode ? ((strumLine.type == 1) != opponentMode ? controlsP1 : controlsP2) : controls,
 					strumLine.vocalsSuffix
@@ -892,6 +889,16 @@
 				strLine.vocals.group = FlxG.sound.defaultMusicGroup;
 				strLine.ID = i;
 				strumLines.add(strLine);
+
+				#if TOUCH_CONTROLS
+				if (officialLayout) {
+					for (ti in 0...strLine.members.length) {
+						final st = strLine.members[ti];
+						if (st == null) continue;
+						st.x = startingPos.x + Note.swagWidth * strScale * strSpacing * ti;
+					}
+				}
+				#end
 
 				#if TOUCH_CONTROLS
 				// 官方 enterMiniMode()：对手键位只保留四个静态箭头，其余（音符）一律不可见
