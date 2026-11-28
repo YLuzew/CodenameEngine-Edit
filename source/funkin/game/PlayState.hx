@@ -899,8 +899,16 @@
 						final stH:Float = first.height;
 						final isPlayerSide:Bool = !strLine.opponentSide;
 						final totalW:Float = (strLine.members.length - 1) * stW * strSpacing + stW;
-						final startX:Float = isPlayerSide ? (FlxG.width - totalW) / 2 : 8;
-						final visTop:Float = isPlayerSide ? (FlxG.height - stH) * 0.95 : 15;
+
+						// 官方 Constants：STRUMLINE_X_OFFSET = 48，STRUMLINE_Y_OFFSET = 24
+						final X_OFFSET:Float = 48;
+						final Y_OFFSET:Float = 24;
+
+						// 玩家：(width - totalW)/2 + X_OFFSET（官方 Classic style，不是正居中）
+						//        y = (height - h) * 0.95 - Y_OFFSET，android 上再 +10（非 pixel 皮肤）
+						// 对手：x = X_OFFSET - 30，y = Y_OFFSET * 0.3
+						final startX:Float = isPlayerSide ? ((FlxG.width - totalW) / 2 + X_OFFSET) : (X_OFFSET - 30);
+						final visTop:Float = isPlayerSide ? ((FlxG.height - stH) * 0.95 - Y_OFFSET + 10) : (Y_OFFSET * 0.3);
 						final hudFlip2:Bool = (camHUD != null && camHUD.downscroll);
 						final logicTop:Float = hudFlip2 ? (FlxG.height - visTop - stH) : visTop;
 
