@@ -873,6 +873,12 @@
 				strLine.vocals.group = FlxG.sound.defaultMusicGroup;
 				strLine.ID = i;
 				strumLines.add(strLine);
+
+				#if TOUCH_CONTROLS
+				// 官方 enterMiniMode()：对手键位只保留四个静态箭头，其余（音符）一律不可见
+				if (mobile.funkin.backend.utils.MobileData.mode == 4 && strumLine.type != 1)
+					strLine.notes.visible = false;
+				#end
 			}
 
 			add(strumLines);
