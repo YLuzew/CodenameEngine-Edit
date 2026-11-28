@@ -1066,49 +1066,37 @@
 		**/
 		public function alignOfficialStrumline(sl:StrumLine, spacing:Float):Void {
 			if (sl == null || sl.members == null || sl.members.length == 0) return;
-			final first = sl.members[0];
-			if (first == null) return;
-
 			final n:Int = sl.members.length;
 			final isPlayerSide:Bool = !sl.opponentSide;
 
-			// 尺寸按屏幕宽度等比：第一版箭头是 146/1280，比现在 DEFAULT_NOTE_SCALE 那套大一圈
+			// 全部用屏幕比例算，不依赖 strum.width / 传入的 spacing，避免被别处改动带偏。
+			// 原版 Funkin：箭头宽 146/1280 = 11.4%，间距 146+80 = 226/1280 = 17.66%
+			final arrowW:Float = FlxG.width * 0.114;
+			final gap:Float = FlxG.width * 0.1766;
+
 			if (isPlayerSide) {
-				final targetW:Int = Std.int(FlxG.width * 0.114);
 				for (i in 0...n) {
 					final st = sl.members[i];
 					if (st == null) continue;
-					st.setGraphicSize(targetW);
+					st.setGraphicSize(Std.int(arrowW));
 					st.updateHitbox();
 				}
 			}
 
-			final stW:Float = first.width;
-			final stH:Float = first.height;
-
+			final stH:Float = sl.members[0] != null ? sl.members[0].height : arrowW;
 			final visTop:Float = isPlayerSide ? ((FlxG.height - stH) * 0.95 - 24 + 10) : (24 * 0.3);
 			final hudFlip:Bool = (camHUD != null && camHUD.downscroll);
 			final logicTop:Float = hudFlip ? (FlxG.height - visTop - stH) : visTop;
 
-			// 先按相对间隔排开：间距写死成 箭头宽 * 1.575（官方 146+80 = 226 的比例），
-			// 不再依赖传进来的 spacing（那条链路实测没生效，四键会贴死）
-			final gap:Float = stW * 1.575;
+			final centerX:Float = FlxG.width / 2;
+			final step:Float = isPlayerSide ? gap : (arrowW * 0.4 * 1.2);
+			final originX:Float = isPlayerSide ? (centerX - (n - 1) * 0.5 * step - arrowW * 0.5) : 18;
+
 			for (i in 0...n) {
 				final st = sl.members[i];
 				if (st == null) continue;
-				st.x = i * gap;
+				st.x = originX + i * step;
 				st.y = logicTop;
-			}
-
-			// 再用实测跨度整体平移：不依赖 stW 估算，保证真的居中
-			final firstSt = sl.members[0];
-			final lastSt = sl.members[n - 1];
-			if (firstSt == null || lastSt == null) return;
-			final span:Float = lastSt.x + lastSt.width - firstSt.x;
-			final shift:Float = isPlayerSide ? ((FlxG.width - span) / 2 - firstSt.x) : (18 - firstSt.x);
-			for (i in 0...n) {
-				final st = sl.members[i];
-				if (st != null) st.x += shift;
 			}
 		}
 		#end
