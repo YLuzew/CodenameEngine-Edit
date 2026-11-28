@@ -45,6 +45,11 @@
 	/** 照搬 dustin：触摸板预览模式下 hitbox 改成下半屏三行布局 **/
 	public static var qqqeb:Bool = false;
 
+	#if TOUCH_CONTROLS
+	/** Official 模式下四条键位的间距系数，create 时算好，update 复用 **/
+	public var officialSpacing:Float = 1.0;
+	#end
+
 		/**
 		* Current PlayState instance.
 		*/
@@ -861,6 +866,7 @@
 						strYPos = flip ? (FlxG.height - visTop - swag * 0.5 * (1 + strScale))
 							: (visTop - swag * 0.5 * (1 - strScale));
 					}
+					officialSpacing = strSpacing;
 				}
 				#end
 
@@ -1066,17 +1072,27 @@
 			final n:Int = sl.members.length;
 			final isPlayerSide:Bool = !sl.opponentSide;
 
-			final totalW:Float = (n - 1) * stW * spacing + stW;
-			final startX:Float = isPlayerSide ? (FlxG.width - totalW) / 2 : 18;
 			final visTop:Float = isPlayerSide ? ((FlxG.height - stH) * 0.95 - 24 + 10) : (24 * 0.3);
 			final hudFlip:Bool = (camHUD != null && camHUD.downscroll);
 			final logicTop:Float = hudFlip ? (FlxG.height - visTop - stH) : visTop;
 
+			// 先按相对间隔排开
 			for (i in 0...n) {
 				final st = sl.members[i];
 				if (st == null) continue;
-				st.x = startX + i * stW * spacing;
+				st.x = i * stW * spacing;
 				st.y = logicTop;
+			}
+
+			// 再用实测跨度整体平移：不依赖 stW 估算，保证真的居中
+			final firstSt = sl.members[0];
+			final lastSt = sl.members[n - 1];
+			if (firstSt == null || lastSt == null) return;
+			final span:Float = lastSt.x + lastSt.width - firstSt.x;
+			final shift:Float = isPlayerSide ? ((FlxG.width - span) / 2 - firstSt.x) : (18 - firstSt.x);
+			for (i in 0...n) {
+				final st = sl.members[i];
+				if (st != null) st.x += shift;
 			}
 		}
 		#end
@@ -1588,8 +1604,11 @@
 		override public function update(elapsed:Float)
 		{
 			#if TOUCH_CONTROLS
-			// 每帧对齐，避免热区与箭头脱节
-			if (mobile.funkin.backend.utils.MobileData.mode == 4) alignOfficialHints();
+			// 每帧校正：键位位置 + 触摸热区，避免被别处改写或与箭头脱节
+			if (mobile.funkin.backend.utils.MobileData.mode == 4) {
+				for (sl in strumLines.members) alignOfficialStrumline(sl, officialSpacing);
+				alignOfficialHints();
+			}
 			#end
 			_ONE_ARG[0] = elapsed;
 			scripts.call("update", _ONE_ARG);
