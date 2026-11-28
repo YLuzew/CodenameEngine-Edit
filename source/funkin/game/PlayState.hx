@@ -700,8 +700,10 @@
 
 			downscroll = Options.downscroll;
 			#if TOUCH_CONTROLS
-			// 官方手机版布局把键位固定在下方，downscroll 无意义，强制关掉
-			if (mobile.funkin.backend.utils.MobileData.mode == 4) downscroll = false;
+			// 官方 Arrows 方案在 initHealthBar 里就把 isDownscroll 视为 true
+			// （scheme == Arrows && !hasExternalInputDevice || Preferences.downscroll），
+			// 键位在下方、音符必须从上往下落，所以这里强制开 downscroll。
+			if (mobile.funkin.backend.utils.MobileData.mode == 4) downscroll = true;
 			#end
 
 			persistentUpdate = true;
@@ -960,6 +962,7 @@
 			#if TOUCH_CONTROLS
 			addMobileControls();
 			mobileControls.instance.visible = false;
+			if (mobile.funkin.backend.utils.MobileData.mode == 4) alignOfficialHints();
 			#end
 
 			super.create();
@@ -1018,6 +1021,41 @@
 		*
 		* This function is dynamic, which means you can do `updateDiscordPresence = function() {}` in scripts.
 		*/
+		#if TOUCH_CONTROLS
+		/**
+		 * 官方 Arrows 方案里触摸热区不写死坐标，而是 follow 玩家箭头的四个 strum
+		 * （FunkinHitbox 的 hint.follow(playerStrumline.getByDirection(dir))）。
+		 * 这里做等价处理：把 TouchPad 的四个方向按钮摆到对应 strum 上。
+		**/
+		public function alignOfficialHints():Void {
+			if (mobileControls == null || mobileControls.instance == null) return;
+			if (!(mobileControls.instance is mobile.objects.TouchPad)) return;
+
+			final pad:mobile.objects.TouchPad = cast mobileControls.instance;
+
+			var playerStrumline:StrumLine = null;
+			for (sl in strumLines.members)
+				if (sl != null && sl.data != null && sl.data.type == 1) { playerStrumline = sl; break; }
+			if (playerStrumline == null) return;
+
+			final buttons:Array<mobile.objects.TouchButton> = [pad.buttonLeft, pad.buttonDown, pad.buttonUp, pad.buttonRight];
+			for (i in 0...buttons.length) {
+				if (i >= playerStrumline.members.length) break;
+				final strum = playerStrumline.members[i];
+				if (strum == null) continue;
+
+				final b = buttons[i];
+				if (b == null) continue;
+				b.setGraphicSize(Std.int(strum.width), Std.int(strum.height));
+				b.updateHitbox();
+				b.x = strum.x;
+				b.y = strum.y;
+				b.bounds.makeGraphic(Std.int(b.width - 50), Std.int(b.height - 50), FlxColor.TRANSPARENT);
+				b.centerBounds();
+			}
+		}
+		#end
+
 		public dynamic function updateDiscordPresence()
 			DiscordUtil.call("onPlayStateUpdate", []);
 
