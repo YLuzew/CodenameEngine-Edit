@@ -1074,7 +1074,10 @@
 				b.setGraphicSize(Std.int(strum.width), Std.int(strum.height));
 				b.updateHitbox();
 				b.x = strum.x;
-				b.y = strum.y;
+				// strum 在 camHUD 里渲染（downscroll 时会被翻转），而触摸按钮在
+				// mobileControlsCam（普通相机，不翻转），所以这里要用视觉坐标。
+				final hudFlip:Bool = (camHUD != null && camHUD.downscroll);
+				b.y = hudFlip ? (FlxG.height - strum.y - strum.height) : strum.y;
 				b.bounds.makeGraphic(Std.int(b.width - 50), Std.int(b.height - 50), FlxColor.TRANSPARENT);
 				b.centerBounds();
 			}
