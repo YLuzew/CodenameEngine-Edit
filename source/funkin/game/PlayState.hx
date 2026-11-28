@@ -850,7 +850,7 @@
 						strSpacing = ((FlxG.height / FlxG.width) * 2.8) * amplification;
 						strOffset = 0.5;
 						final visH:Float = swag * strScale;
-						final visTop:Float = (FlxG.height - visH) * 0.95;
+						final visTop:Float = (FlxG.height - visH) * 0.90;
 						strYPos = flip ? (FlxG.height - visTop - swag * 0.5 * (1 + strScale))
 							: (visTop - swag * 0.5 * (1 - strScale));
 					} else {
@@ -967,9 +967,11 @@
 				add(icon);
 			}
 
-			scoreTxt = new FunkinText(healthBarBG.x + 50, healthBarBG.y + 30, Std.int(healthBarBG.width - 100), TEXT_GAME_SCORE.format([songScore]), 16);
-			missesTxt = new FunkinText(healthBarBG.x + 50, healthBarBG.y + 30, Std.int(healthBarBG.width - 100), TEXT_GAME_MISSES.format([misses]), 16);
-			accuracyTxt = new FunkinText(healthBarBG.x + 50, healthBarBG.y + 30, Std.int(healthBarBG.width - 100), TEXT_GAME_ACCURACY.format(["-%", "(N/A)"]), 16);
+			// downscroll 下 HudCamera 会把 y 翻转，文字要放到血条的另一侧才不叠在一起
+			final hudTextOffset:Float = (camHUD != null && camHUD.downscroll) ? -34 : 30;
+			scoreTxt = new FunkinText(healthBarBG.x + 50, healthBarBG.y + hudTextOffset, Std.int(healthBarBG.width - 100), TEXT_GAME_SCORE.format([songScore]), 16);
+			missesTxt = new FunkinText(healthBarBG.x + 50, healthBarBG.y + hudTextOffset, Std.int(healthBarBG.width - 100), TEXT_GAME_MISSES.format([misses]), 16);
+			accuracyTxt = new FunkinText(healthBarBG.x + 50, healthBarBG.y + hudTextOffset, Std.int(healthBarBG.width - 100), TEXT_GAME_ACCURACY.format(["-%", "(N/A)"]), 16);
 			accuracyTxt.addFormat(accFormat, 0, 1);
 
 			for(text in [scoreTxt, missesTxt, accuracyTxt]) {
