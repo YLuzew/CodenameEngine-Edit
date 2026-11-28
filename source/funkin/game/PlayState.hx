@@ -1106,20 +1106,19 @@
 
 				final b = buttons[i];
 				if (b == null) continue;
-				// 热区跟箭头同尺寸：只按宽度等比缩放，别把 strum.height 硬塞进来
-				// （那样会把热区拉成判定线那种全屏高度）
-				b.setGraphicSize(Std.int(strum.width));
+
+				// 热区做成「一列全高」的 hitbox：宽度跟箭头一致，高度铺满整个屏幕。
+				// 这样手指落在这一列的任何高度都能判定，不是只能戳箭头那一小块。
+				b.setGraphicSize(Std.int(strum.width), Std.int(FlxG.height));
 				b.updateHitbox();
 				b.x = strum.x;
-				// strum 在 camHUD 里渲染（downscroll 时会被翻转），而触摸按钮在
-				// mobileControlsCam（普通相机，不翻转），所以这里要用视觉坐标。
-				final hudFlip:Bool = (camHUD != null && camHUD.downscroll);
-				b.y = hudFlip ? (FlxG.height - strum.y - strum.height) : strum.y;
+				b.y = 0;
+
 				// 视觉完全交给判定线的 strum，按钮只当热区
 				b.alpha = 0;
 				b.statusAlphas = [0, 0, 0];
 				b.label.visible = false;
-				b.bounds.makeGraphic(Std.int(b.width - 20), Std.int(b.height - 20), FlxColor.TRANSPARENT);
+				b.bounds.makeGraphic(Std.int(b.width), Std.int(b.height), FlxColor.TRANSPARENT);
 				b.centerBounds();
 			}
 		}
