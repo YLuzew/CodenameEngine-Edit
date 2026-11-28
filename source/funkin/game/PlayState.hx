@@ -1060,7 +1060,7 @@
 
 			var playerStrumline:StrumLine = null;
 			for (sl in strumLines.members)
-				if (sl != null && sl.data != null && sl.data.type == 1) { playerStrumline = sl; break; }
+				if (sl != null && !sl.opponentSide) { playerStrumline = sl; break; }
 			if (playerStrumline == null) return;
 
 			final buttons:Array<mobile.objects.TouchButton> = [pad.buttonLeft, pad.buttonDown, pad.buttonUp, pad.buttonRight];
@@ -1551,6 +1551,10 @@
 		@:dox(hide)
 		override public function update(elapsed:Float)
 		{
+			#if TOUCH_CONTROLS
+			// 每帧对齐，避免热区与箭头脱节
+			if (mobile.funkin.backend.utils.MobileData.mode == 4) alignOfficialHints();
+			#end
 			_ONE_ARG[0] = elapsed;
 			scripts.call("update", _ONE_ARG);
 
