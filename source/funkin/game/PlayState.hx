@@ -857,9 +857,17 @@
 				#end
 
 				var strXPos:Float = StrumLine.calculateStartingXPos(strOffset, strScale, strSpacing, keyCount);
-				var startingPos:FlxPoint = strumLine.strumPos != null ?
-					FlxPoint.get(strumLine.strumPos[0] == 0 ? strXPos : strumLine.strumPos[0], strumLine.strumPos[1]) :
-					FlxPoint.get(strXPos, strYPos);
+				var startingPos:FlxPoint = FlxPoint.get(strXPos, strYPos);
+
+				#if TOUCH_CONTROLS
+				// Official 模式下位置完全由官方布局决定，不能让谱面的 strumPos 把位置抢回去
+				final officialLayout:Bool = (mobile.funkin.backend.utils.MobileData.mode == 4);
+				#else
+				final officialLayout:Bool = false;
+				#end
+
+				if (!officialLayout && strumLine.strumPos != null)
+					startingPos = FlxPoint.get(strumLine.strumPos[0] == 0 ? strXPos : strumLine.strumPos[0], strumLine.strumPos[1]);
 				var strLine = new StrumLine(chars,
 					startingPos,
 					strumLine.strumScale == null ? 1 : strumLine.strumScale,
