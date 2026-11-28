@@ -1106,7 +1106,9 @@
 
 				final b = buttons[i];
 				if (b == null) continue;
-				b.setGraphicSize(Std.int(strum.width), Std.int(strum.height));
+				// 热区跟箭头同尺寸：只按宽度等比缩放，别把 strum.height 硬塞进来
+				// （那样会把热区拉成判定线那种全屏高度）
+				b.setGraphicSize(Std.int(strum.width));
 				b.updateHitbox();
 				b.x = strum.x;
 				// strum 在 camHUD 里渲染（downscroll 时会被翻转），而触摸按钮在
@@ -1117,7 +1119,7 @@
 				b.alpha = 0;
 				b.statusAlphas = [0, 0, 0];
 				b.label.visible = false;
-				b.bounds.makeGraphic(Std.int(b.width - 50), Std.int(b.height - 50), FlxColor.TRANSPARENT);
+				b.bounds.makeGraphic(Std.int(b.width - 20), Std.int(b.height - 20), FlxColor.TRANSPARENT);
 				b.centerBounds();
 			}
 		}
