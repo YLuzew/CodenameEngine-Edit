@@ -1070,9 +1070,9 @@
 			final isPlayerSide:Bool = !sl.opponentSide;
 
 			// 全部用屏幕比例算，不依赖 strum.width / 传入的 spacing，避免被别处改动带偏。
-			// 原版 Funkin：箭头宽 146/1280 = 11.4%，间距 146+80 = 226/1280 = 17.66%
-			final arrowW:Float = FlxG.width * 0.114;
-			final gap:Float = FlxG.width * 0.1766;
+			// 玩家箭头宽 = 屏宽 10.3%（1280 下 132），间距 = 箭头宽 * 1.575（对齐 146+80 的比例）
+			final arrowW:Float = FlxG.width * 0.103;
+			final gap:Float = arrowW * 1.575;
 
 			if (isPlayerSide) {
 				for (i in 0...n) {
@@ -1089,7 +1089,9 @@
 			final logicTop:Float = hudFlip ? (FlxG.height - visTop - stH) : visTop;
 
 			final centerX:Float = FlxG.width / 2;
-			final step:Float = isPlayerSide ? gap : (arrowW * 0.4 * 1.2);
+			// 对手不缩放（保持 0.4 的 createStrum 尺寸），间距按它自己的宽度算，别用玩家那套
+			final oppoW:Float = (sl.members[0] != null ? sl.members[0].width : arrowW * 0.4);
+			final step:Float = isPlayerSide ? gap : (oppoW * 1.05);
 			final originX:Float = isPlayerSide ? (centerX - (n - 1) * 0.5 * step - arrowW * 0.5) : 18;
 
 			for (i in 0...n) {
