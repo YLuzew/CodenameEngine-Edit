@@ -891,35 +891,7 @@
 				strumLines.add(strLine);
 
 				#if TOUCH_CONTROLS
-				if (officialLayout) {
-					// 用 strum 的实际宽高重排，swagWidth 与真实帧宽不一致，累积起来会整体偏
-					final first:Strum = strLine.members.length > 0 ? strLine.members[0] : null;
-					if (first != null) {
-						final stW:Float = first.width;
-						final stH:Float = first.height;
-						final isPlayerSide:Bool = !strLine.opponentSide;
-						final totalW:Float = (strLine.members.length - 1) * stW * strSpacing + stW;
-
-						// 官方 Constants：STRUMLINE_X_OFFSET = 48，STRUMLINE_Y_OFFSET = 24
-						final X_OFFSET:Float = 48;
-						final Y_OFFSET:Float = 24;
-
-						// 玩家：(width - totalW)/2 + X_OFFSET（官方 Classic style，不是正居中）
-						//        y = (height - h) * 0.95 - Y_OFFSET，android 上再 +10（非 pixel 皮肤）
-						// 对手：x = X_OFFSET - 30，y = Y_OFFSET * 0.3
-						final startX:Float = isPlayerSide ? ((FlxG.width - totalW) / 2 + X_OFFSET) : (X_OFFSET - 30);
-						final visTop:Float = isPlayerSide ? ((FlxG.height - stH) * 0.95 - Y_OFFSET + 10) : (Y_OFFSET * 0.3);
-						final hudFlip2:Bool = (camHUD != null && camHUD.downscroll);
-						final logicTop:Float = hudFlip2 ? (FlxG.height - visTop - stH) : visTop;
-
-						for (ti in 0...strLine.members.length) {
-							final st = strLine.members[ti];
-							if (st == null) continue;
-							st.x = startX + ti * stW * strSpacing;
-							st.y = logicTop;
-						}
-					}
-				}
+				if (officialLayout) alignOfficialStrumline(strLine, strSpacing);
 				#end
 
 				#if TOUCH_CONTROLS
@@ -1077,6 +1049,38 @@
 		*
 		* This function is dynamic, which means you can do `updateDiscordPresence = function() {}` in scripts.
 		*/
+		#if TOUCH_CONTROLS
+		/**
+		 * Official 模式的键位排布，只在这里处理，别处不再散落判断。
+		 * 位置/大小照 FunkinCrew/Funkin PlayState.initNoteHitbox()：
+		 *   玩家：x 居中，y = (height - h) * 0.95 - 24 (+10 on android)
+		 *   对手：x = 18，y = 24 * 0.3
+		**/
+		public function alignOfficialStrumline(sl:StrumLine, spacing:Float):Void {
+			if (sl == null || sl.members == null || sl.members.length == 0) return;
+			final first = sl.members[0];
+			if (first == null) return;
+
+			final stW:Float = first.width;
+			final stH:Float = first.height;
+			final n:Int = sl.members.length;
+			final isPlayerSide:Bool = !sl.opponentSide;
+
+			final totalW:Float = (n - 1) * stW * spacing + stW;
+			final startX:Float = isPlayerSide ? (FlxG.width - totalW) / 2 : 18;
+			final visTop:Float = isPlayerSide ? ((FlxG.height - stH) * 0.95 - 24 + 10) : (24 * 0.3);
+			final hudFlip:Bool = (camHUD != null && camHUD.downscroll);
+			final logicTop:Float = hudFlip ? (FlxG.height - visTop - stH) : visTop;
+
+			for (i in 0...n) {
+				final st = sl.members[i];
+				if (st == null) continue;
+				st.x = startX + i * stW * spacing;
+				st.y = logicTop;
+			}
+		}
+		#end
+
 		#if TOUCH_CONTROLS
 		/**
 		 * 官方 Arrows 方案里触摸热区不写死坐标，而是 follow 玩家箭头的四个 strum
