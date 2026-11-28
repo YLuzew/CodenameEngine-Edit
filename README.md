@@ -1,8 +1,8 @@
 # CodenameEngine-Edit
 
-> **个人修改版。** 这是我自己（B站 @辕卢泽）用的 Codename Engine 移动端构建，基于橙子的移动端分支改出来的私人分支 —— 不是官方版本，也不是给所有人用的发行版。这里的东西按我自己的用法调，别人的设备、别人的谱面出了状况我不保证。
+> **个人修改版。** 这是 [@辕卢泽](https://b23.tv/QMLskcX) 做的 Codename Engine 移动端修改版，基于橙子的移动端分支改出来 —— 不是官方版本。目前以自己使用为主，后续会整理成正式发行版。
 >
-> 想用原版请去上游；这份仓库存在的意义只有一条：让它在我的手机上跑得顺手。
+> 想要原版请去上游；这里的改动、问题反馈和更新节奏都以这份分支为准。
 
 改动集中在 **Android 进歌加载性能**、**模组自定义 state 加载** 与 **移动端触摸板体系**，附带一条能直接出 APK 的 GitHub Actions 流水线。
 
@@ -259,11 +259,11 @@ addons/ mods/ adb/ key.keystore/ project.xml/ shell.nix/ ...
 
 | 项 | 说明 |
 | --- | --- |
-| 性质 | 个人修改版（Personal build），非官方、非通用发行版 |
-| 作者 | B站 @辕卢泽 |
+| 性质 | 个人修改版（Personal build），非官方；后续整理成正式发行版 |
+| 作者 | B站 [@辕卢泽](https://b23.tv/QMLskcX) |
 | 包名 | `com.luzew.codename.edit` |
-| 用途 | 自己手机上跑 CNE + 移动端触摸板；顺手做的性能与兼容性修补 |
-| 反馈 | 只对本人设备负责；上游问题请回 `azmlpoh/CodenameEngine-Mobile` 或 `CodenameCrew/CodenameEngine` |
+| 用途 | 移动端体验（触摸板/键位布局）+ 进歌性能与模组兼容性修补 |
+| 反馈 | 提 issue 或 B 站留言都行；纯上游的问题请回 `azmlpoh/CodenameEngine-Mobile` 或 `CodenameCrew/CodenameEngine` |
 
 ## 5. 改动记录
 
