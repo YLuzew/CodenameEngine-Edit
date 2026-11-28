@@ -892,10 +892,24 @@
 
 				#if TOUCH_CONTROLS
 				if (officialLayout) {
-					for (ti in 0...strLine.members.length) {
-						final st = strLine.members[ti];
-						if (st == null) continue;
-						st.x = startingPos.x + Note.swagWidth * strScale * strSpacing * ti;
+					// 用 strum 的实际宽高重排，swagWidth 与真实帧宽不一致，累积起来会整体偏
+					final first:Strum = strLine.members.length > 0 ? strLine.members[0] : null;
+					if (first != null) {
+						final stW:Float = first.width;
+						final stH:Float = first.height;
+						final isPlayerSide:Bool = !strLine.opponentSide;
+						final totalW:Float = (strLine.members.length - 1) * stW * strSpacing + stW;
+						final startX:Float = isPlayerSide ? (FlxG.width - totalW) / 2 : 8;
+						final visTop:Float = isPlayerSide ? (FlxG.height - stH) * 0.95 : 15;
+						final hudFlip2:Bool = (camHUD != null && camHUD.downscroll);
+						final logicTop:Float = hudFlip2 ? (FlxG.height - visTop - stH) : visTop;
+
+						for (ti in 0...strLine.members.length) {
+							final st = strLine.members[ti];
+							if (st == null) continue;
+							st.x = startX + ti * stW * strSpacing;
+							st.y = logicTop;
+						}
 					}
 				}
 				#end
