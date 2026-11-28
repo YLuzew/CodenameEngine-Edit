@@ -852,9 +852,9 @@
 
 					if (strumLine.type == 1) {
 						strScale = ((FlxG.height / FlxG.width) * 1.95) * amplification;
-						// 官方那边 2.8 是相对他们自己的间距基准；Edit 的 createStrum 是拿
-						// swag*scale*spacing 直接当间距，用 1.575 会让四键被撑散，取 1.0 紧贴。
-						strSpacing = 1.0;
+						// 官方 Arrows 的间距是 146(宽) + 80(间隙) = 226，换算成倍率正好是 1.575
+						// （第一版 ARROWS.json 用的就是 226 那组坐标）。别改成 1.0，那样四键会贴死。
+						strSpacing = ((FlxG.height / FlxG.width) * 2.8) * amplification;
 						strOffset = 0.5;
 						final visH:Float = swag * strScale;
 						final visTop:Float = (FlxG.height - visH) * 0.90;
